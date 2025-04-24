@@ -35,7 +35,7 @@ export default function Header() {
             className={`px-3 py-1 rounded-lg transition
               ${active === id
                 ? "text-black font-semibold"
-                : "text-black/70 hover:text-black"}
+                : "text-black hover:text-black"}
             `}
           >
             {label}
