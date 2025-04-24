@@ -21,7 +21,7 @@ const PROJECTS: Project[] = [
     image: "/images/portfolio.png",
     techs: ["Next.js", "TypeScript", "Tailwind CSS"],
     github: "https://github.com/atsuki61/my-portfolio",
-    live: "https://my-portfolio.vercel.app",
+    live: "https://my-portfolio-drab-zeta-67.vercel.app/",
   },
   {
     id: "proj2",
