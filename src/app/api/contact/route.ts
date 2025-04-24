@@ -1,41 +1,36 @@
+// src/app/api/contact/route.ts
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 
-// ● 環境変数を使う（.env.local に設定）
-// SMTP_HOST=smtp.example.com
-// SMTP_PORT=587
-// SMTP_USER=your_user
-// SMTP_PASS=your_pass
-// MAIL_TO=your_dest@example.com
-
+// .env.local で設定した環境変数を使います
 const transporter = nodemailer.createTransport({
   host: process.env.SMTP_HOST,
   port: Number(process.env.SMTP_PORT || 587),
-  secure: false, // true にすると port 465（SSL/TLS）を使う
+  secure: Number(process.env.SMTP_PORT) === 465, // 465ならSSL/TLSで接続
   auth: {
     user: process.env.SMTP_USER,
     pass: process.env.SMTP_PASS,
   },
 });
 
-/** POST /api/contact */
 export async function POST(request: Request) {
   try {
+    // 送信されたJSONを取得
     const { name, email, message } = await request.json();
 
-    // シンプルなバリデーション
+    // 簡易バリデーション
     if (!name || !email || !message) {
       return NextResponse.json(
-        { error: "全てのフィールドは必須です。" },
+        { error: "名前・メール・メッセージは必須です。" },
         { status: 400 }
       );
     }
 
-    // メール本文の組み立て
+    // メールオプションを設定
     const mailOptions = {
-      from: `"Portfolio Site" <${process.env.SMTP_USER}>`,
+      from: `"Portfolio Contact" <${process.env.SMTP_USER}>`,
       to: process.env.MAIL_TO,
-      subject: `お問い合わせ通知: ${name} さんから`,
+      subject: `お問い合わせ: ${name}さんから`,
       text: `
 名前: ${name}
 メール: ${email}
@@ -52,9 +47,10 @@ ${message}
       `,
     };
 
-    // 送信
+    // メール送信
     await transporter.sendMail(mailOptions);
 
+    // 送信成功レスポンス
     return NextResponse.json({ ok: true });
   } catch (err) {
     console.error("メール送信エラー:", err);
