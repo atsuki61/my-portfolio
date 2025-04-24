@@ -17,22 +17,23 @@ const PROJECTS: Project[] = [
   {
     id: "proj1",
     title: "ポートフォリオサイト",
-    description: "Next.js と Tailwind CSS で作成した自己紹介サイトです。",
-    image: "/images/project1.png",
+    description: "Next.js、TypeScript、Tailwind CSSを使ったポートフォリオサイトです。",
+    image: "/images/portfolio.png",
     techs: ["Next.js", "TypeScript", "Tailwind CSS"],
-    github: "https://github.com/username/my-portfolio",
+    github: "https://github.com/atsuki61/my-portfolio",
     live: "https://my-portfolio.vercel.app",
   },
   {
     id: "proj2",
     title: "ToDo アプリ",
-    description: "おしゃれなToDoアプリです。",
+    description: "シンプルなToDoアプリです。",
     image: "/images/todo.png",
-    techs: ["HTML5", "CSS3", "JavaScript"],
-    github: "https://todo-app-virid-pi-51.vercel.app/",
+    techs: ["HTML", "CSS", "JavaScript"],
+    github:"https://github.com/atsuki61/todo-app",
+    live: "https://todo-app-virid-pi-51.vercel.app/",
     }
     
-  // 追加したいプロジェクトをここにどんどん増やせます
+  // 追加したいプロジェクトを増やせる
 ];
 
 export default function ProjectsSection() {
