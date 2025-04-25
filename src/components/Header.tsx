@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState, useEffect } from "react";
 
 const NAV_ITEMS = [
@@ -27,21 +28,32 @@ export default function Header() {
 
   return (
     <header className="fixed top-0 w-full bg-white z-50 shadow-sm">
-      <nav className="mx-auto max-w-4xl flex justify-center gap-8 p-4">
-        {NAV_ITEMS.map(({ id, label }) => (
-          <Link
-            key={id}
-            href={`#${id}`}
-            className={`px-3 py-1 rounded-lg transition
-              ${active === id
-                ? "text-black font-semibold"
-                : "text-black hover:text-black"}
-            `}
-          >
-            {label}
-          </Link>
-        ))}
-      </nav>
+      <div className="mx-auto max-w-4xl flex items-center justify-between p-4">
+        <Link href="/" className="flex items-center">
+          <Image
+            src="/images/favicon-32x32.png"
+            alt="Logo"
+            width={32}
+            height={32}
+            className="mr-2"
+          />
+        </Link>
+        <nav className="flex gap-8">
+          {NAV_ITEMS.map(({ id, label }) => (
+            <Link
+              key={id}
+              href={`#${id}`}
+              className={`px-3 py-1 rounded-lg transition
+                ${active === id
+                  ? "text-black font-semibold"
+                  : "text-black hover:text-black"}
+              `}
+            >
+              {label}
+            </Link>
+          ))}
+        </nav>
+      </div>
     </header>
   );
 }
