@@ -8,14 +8,15 @@ import { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'atsuki | portfolio',
   description: 'Atsukiのポートフォリオサイト',
+  manifest: '/manifest.json',
   icons: {
     icon: [
-      { url: '/favicon.ico' },
-      { url: '/favicon-32x32.png', type: 'image/png', sizes: '32x32' },
-      { url: '/favicon-16x16.png', type: 'image/png', sizes: '16x16' },
+      { url: '/images/favicon.ico' },
+      { url: '/images/favicon-32x32.png', type: 'image/png', sizes: '32x32' },
+      { url: '/images/favicon-16x16.png', type: 'image/png', sizes: '16x16' },
     ],
     apple: [
-      { url: '/apple-touch-icon.png' },
+      { url: '/images/apple-touch-icon.png' },
     ],
   },
 };
