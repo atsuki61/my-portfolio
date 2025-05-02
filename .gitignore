@@ -45,3 +45,5 @@ next-env.d.ts
 
 # SpecStory
 .specstory/
+# SpecStory explanation file
+.specstory/.what-is-this.md
