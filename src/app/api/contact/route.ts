@@ -17,7 +17,6 @@ export async function POST(request: Request) {
   try {
     // 送信されたJSONを取得
     const { name, email, message } = await request.json();
-
     // 簡易バリデーション
     if (!name || !email || !message) {
       return NextResponse.json(
@@ -48,15 +47,21 @@ ${message}
     };
 
     // メール送信
-    await transporter.sendMail(mailOptions);
+  // バックグラウンドでメール送信（awaitしない）
+  transporter.sendMail(mailOptions)
+    .then(() => console.log("メール送信OK"))
+    .catch(err => console.error("送信NG", err));
 
-    // 送信成功レスポンス
-    return NextResponse.json({ ok: true });
-  } catch (err) {
-    console.error("メール送信エラー:", err);
-    return NextResponse.json(
-      { error: "送信中にエラーが発生しました。" },
-      { status: 500 }
-    );
-  }
+  // 受け取りだけACKして高速返却
+  return NextResponse.json(
+    { queued: true },
+    { status: 202 }
+  );
+} catch (err) {
+  console.error("レスポンス作成エラー:", err);
+  return NextResponse.json(
+    { error: "送信中にエラーが発生しました。" },
+    { status: 500 }
+  );
+}
 }
