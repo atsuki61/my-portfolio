@@ -13,7 +13,7 @@ export default function Moon() {
   // Mesh の参照用
   const mesh = useRef<Mesh>(null!);
   // public/images/moon_texture.jpg に配置した満月テクスチャをロード
-  const texture = useLoader(TextureLoader, "/images/moon_texture.jpg");
+  const texture = useLoader(TextureLoader, "/images/moon.jpg");
   // Canvas 内のマウス座標を取得（-1 〜 +1）
   const { mouse } = useThree();
 
@@ -37,9 +37,13 @@ export default function Moon() {
 
   return (
     <mesh ref={mesh}>
-      {/* 半径 2、幅細分割 64、縦細分割 64 */}
-      <sphereGeometry args={[2, 64, 64]} />
-      <meshPhongMaterial map={texture} />
+      {/* 半径 1、幅細分割 64、縦細分割 64 */}
+      <sphereGeometry args={[1.7, 64, 64]} />
+      <meshPhongMaterial
+        map={texture}
+        shininess={100}
+        specular="#ffffff"
+      />
     </mesh>
   );
 }
