@@ -1,12 +1,8 @@
 "use client";
 
 import { useForm } from "react-hook-form";
-
-type FormData = {
-  name: string;
-  email: string;
-  message: string;
-};
+import { FormValues, formValidation } from "@/utils/validation";
+import { sendEmail } from "@/utils/sendEmail";
 
 export default function ContactSection() {
   // ① react-hook-form のセットアップ
@@ -15,22 +11,16 @@ export default function ContactSection() {
     handleSubmit,
     reset,
     formState: { errors, isSubmitting },
-  } = useForm<FormData>();
+  } = useForm<FormValues>();
 
   // ② フォーム送信時の処理
-  const onSubmit = async (data: FormData) => {
-    try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-      if (!res.ok) throw new Error("送信に失敗しました");
-      alert("メッセージを送信しました！");
+  const onSubmit = async (data: FormValues) => {
+    const result = await sendEmail(data);
+    if (result.success) {
+      alert(result.message);
       reset(); // フォームをクリア
-    } catch (err) {
-      console.error(err);
-      alert("送信中にエラーが発生しました。");
+    } else {
+      alert(result.message);
     }
   };
 
@@ -50,7 +40,7 @@ export default function ContactSection() {
             <input
               id="name"
               type="text"
-              {...register("name", { required: "名前は必須です" })}
+              {...register("name", formValidation.name)}
               className="mt-1 block w-full border border-gray-300 rounded p-2"
             />
             {errors.name && (
@@ -66,13 +56,7 @@ export default function ContactSection() {
             <input
               id="email"
               type="email"
-              {...register("email", {
-                required: "メールアドレスは必須です",
-                pattern: {
-                  value: /^\S+@\S+$/i,
-                  message: "正しいメールアドレスを入力してください",
-                },
-              })}
+              {...register("email", formValidation.email)}
               className="mt-1 block w-full border border-gray-300 rounded p-2"
             />
             {errors.email && (
@@ -88,7 +72,7 @@ export default function ContactSection() {
             <textarea
               id="message"
               rows={4}
-              {...register("message", { required: "メッセージは必須です" })}
+              {...register("message", formValidation.message)}
               className="mt-1 block w-full border border-gray-300 rounded p-2"
             />
             {errors.message && (
