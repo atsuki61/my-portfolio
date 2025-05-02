@@ -1,33 +1,10 @@
 // src/components/sections/HeroSection.tsx
 "use client";
 
-import { Canvas, useFrame, useLoader } from "@react-three/fiber";
+import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
-import { TextureLoader, Mesh } from "three";
-import { useRef } from "react";
-
-//
-// 1) Moon コンポーネント：SphereGeometry に満月テクスチャを貼ってゆっくり自転させる
-//
-function Moon() {
-  // Mesh の参照用
-  const mesh = useRef<Mesh>(null!);
-  // public/images/moon_texture.jpg に配置した満月テクスチャをロード
-  const texture = useLoader(TextureLoader, "/images/moon_texture.jpg");
-
-  // フレームごとにゆっくり回転
-  useFrame((_, delta) => {
-    mesh.current.rotation.y += delta * 0.02;
-  });
-
-  return (
-    <mesh ref={mesh}>
-      {/* 半径 2、幅細分割 64、縦細分割 64 */}
-      <sphereGeometry args={[2, 64, 64]} />
-      <meshPhongMaterial map={texture} />
-    </mesh>
-  );
-}
+import React from "react";
+import Moon from "../Moon";
 
 export default function HeroSection() {
   return (
