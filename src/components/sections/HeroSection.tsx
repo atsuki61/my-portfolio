@@ -22,10 +22,10 @@ export default function HeroSection() {
         </div>
 
         {/* 右 2/3：満月の 3D Canvas */}
-        <div className="w-full md:w-2/3 relative">
+        <div className="w-full h-[70vh] md:h-auto md:w-2/3 relative">
           <Canvas
             className="absolute inset-0"
-            camera={{ position: [0, 0, 6], fov: 50 }}
+            camera={{ position: [0, 0, 4], fov: 45 }}
           >
             {/* ライティング */}
             <ambientLight intensity={0.5} />
