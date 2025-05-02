@@ -9,14 +9,15 @@ import Moon from "../Moon";
 export default function HeroSection() {
   return (
     <section id="home" className="relative h-screen bg-black overflow-hidden">
-      <div className="flex h-full">
+      {/* スマホ: 縦積み (flex-col) / md以上: 横並び (flex-row) */}
+      <div className="flex flex-col md:flex-row h-full">
         {/* 左 1/3：テキスト */}
         <div className="w-full md:w-1/3 flex flex-col justify-center px-8 z-10">
           <h1 className="text-5xl font-bold text-white mb-4">
             Hi! My name is Atsuki!
           </h1>
           <p className="text-lg text-gray-300">
-            Next.js × TypeScript × Tailwind で月のように輝くサイトを制作中
+          I am a third-year student at Kyoto Computer Gakuin.
           </p>
         </div>
 
