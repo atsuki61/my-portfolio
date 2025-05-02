@@ -23,9 +23,7 @@ export default function AboutSection() {
       <div className="max-w-3xl mx-auto px-4 space-y-6">
         <h2 className="text-3xl font-bold text-center">About Me</h2>
         <p>  滋賀県出身の学生で、現在京都コンピュータ学院京都駅前校で
-          Webアプリケーション開発を学んでいます。休学中の今は、
-          自分のペースでNext.jsやTypeScript、Tailwind CSSを中心に
-          フロントエンド技術を深掘り中です。</p>
+          Webアプリケーション開発を学んでいます。。</p>
 
         {/* アイコン付きスキルリスト */}
         <ul className="grid grid-cols-2 sm:grid-cols-3 gap-6">
