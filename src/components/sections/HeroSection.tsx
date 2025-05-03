@@ -3,41 +3,41 @@
 
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Stars } from "@react-three/drei";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import TextureSphere from "../TextureSphere";
 
 export default function HeroSection() {
   // テクスチャ一覧を用意 - 各天体の特性も定義
-  const textures = [
+  const textures = useMemo(() => [
     { 
       name: "月", 
       url: "/images/moon.jpg",
       color: "#1a1a2e", // 暗い青色の背景
-      rotationSpeed: 0.01, // 遅い回転
+      rotationSpeed: 0.5, // 遅い回転
       particleColor: "#ffffff" // 白い星
     },
     { 
       name: "地球", 
       url: "/images/earth.jpg",
       color: "#0a3d62", // 深い青色の背景
-      rotationSpeed: 0.03, // 中程度の回転
+      rotationSpeed: 0.4, // 中程度の回転
       particleColor: "#aaccff" // 青白い星
     },
     { 
       name: "太陽", 
       url: "/images/sun.jpg",
       color: "#6a1b0a", // 赤褐色の背景
-      rotationSpeed: 0.05, // 速い回転
+      rotationSpeed: 0.4, // 速い回転
       particleColor: "#ffcc66" // 黄色い星
     },
     { 
       name: "シナモン", 
       url: "/images/シナモン.jpg",
       color: "#1a1a2e", // 暗い青色の背景
-      rotationSpeed: 0.02, // 遅い回転
+      rotationSpeed: 100, // 遅い回転
       particleColor: "#ffffff" // 白い星
     },
-  ];
+  ], []);
   
   // 現在選択中のインデックス
   const [idx, setIdx] = useState(0);
@@ -51,7 +51,7 @@ export default function HeroSection() {
   useEffect(() => {
     // 新しい背景色をセット
     setBgColor(textures[idx].color);
-  }, [idx]);
+  }, [idx, textures]);
 
   return (
     <section 
