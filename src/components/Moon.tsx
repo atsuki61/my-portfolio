@@ -17,7 +17,7 @@ export default function Moon() {
   // Canvas 内のマウス座標を取得（-1 〜 +1）
   const { mouse } = useThree();
 
-  useFrame((_, delta) => {
+  useFrame((_state: unknown, delta: number) => {
     // 自転アニメーション
     mesh.current.rotation.y += delta * 0.02;
 
