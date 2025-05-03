@@ -30,6 +30,13 @@ export default function HeroSection() {
       rotationSpeed: 0.05, // 速い回転
       particleColor: "#ffcc66" // 黄色い星
     },
+    { 
+      name: "シナモン", 
+      url: "/images/シナモン.jpg",
+      color: "#1a1a2e", // 暗い青色の背景
+      rotationSpeed: 0.02, // 遅い回転
+      particleColor: "#ffffff" // 白い星
+    },
   ];
   
   // 現在選択中のインデックス
@@ -60,7 +67,7 @@ export default function HeroSection() {
             Hi! My name is Atsuki!
           </h1>
           <p className="text-lg text-gray-300 mb-6 transition-all duration-500">
-            I am a third-year student at Kyoto Computer Gakuin.
+            I am a third-year student at Kyoto Computer gain.
           </p>
         </div>
 
