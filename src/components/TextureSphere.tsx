@@ -45,7 +45,7 @@ export default function TextureSphere({ textureURL, onClick, rotationSpeed = 0.0
   }, [textureURL, api, currentURL]);
 
   // 自転アニメーション + パララックス効果
-  useFrame((_, delta) => {
+  useFrame((_state: unknown, delta: number) => {
     // 自転アニメーション（惑星によって回転速度が異なる）
     mesh.current.rotation.y += delta * rotationSpeed;
 
