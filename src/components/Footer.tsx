@@ -12,7 +12,7 @@ export default function Footer() {
         {/* SNSアイコンリンク */}
         <div className="flex space-x-4 mt-4 md:mt-0">
           <a
-            href="https://github.com/ユーザー名"
+            href="https://github.com/atsuki61"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="GitHub"
@@ -20,7 +20,7 @@ export default function Footer() {
             <Github className="w-5 h-5 hover:text-gray-600" />
           </a>
           <a
-            href="https://twitter.com/ユーザー名"
+            href="https://x.com/atsuki_prog_ai"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Twitter"

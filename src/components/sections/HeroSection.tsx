@@ -30,13 +30,6 @@ export default function HeroSection() {
       rotationSpeed: 0.4, // 速い回転
       particleColor: "#ffcc66" // 黄色い星
     },
-    { 
-      name: "シナモン", 
-      url: "/images/シナモン.jpg",
-      color: "#1a1a2e", // 暗い青色の背景
-      rotationSpeed: 100, // 遅い回転
-      particleColor: "#ffffff" // 白い星
-    },
   ], []);
   
   // 現在選択中のインデックス
