@@ -53,7 +53,7 @@ function IconMarqueeSection({ title, items, speed }: { title?: string; items: It
   return (
     <div>
       <h3 className="text-2xl font-semibold mb-4 text-center font-['Space_Grotesk']">{title}</h3>
-      <div className="pt-5 pb-12 overflow-visible">
+      <div className="pt-2 pb-6 overflow-visible">
         <Marquee {...MARQUEE_PROPS} speed={speed}>
           {items.map(({ icon: Icon, label }) => (
             <div
@@ -72,7 +72,7 @@ function IconMarqueeSection({ title, items, speed }: { title?: string; items: It
 
 export default function AboutSection() {
   return (
-    <section id="about" className="py-20 bg-white text-black">
+    <section id="about" className="py-20 bg-[#1A1A2E] text-white">
       <div className="max-w-5xl mx-auto px-4 space-y-12">
         <h2 className="text-4xl font-bold text-center font-['Space_Grotesk']">About Me</h2>
         <p className="text-center text-lg">
@@ -84,7 +84,9 @@ export default function AboutSection() {
         {/* 趣味・好きなこと */}
         <IconMarqueeSection items={HOBBIES} speed={40} />
 
-        <p className="text-center text-lg">将来的にはUI/UXも自分でデザインできるエンジニアを目指しています！</p>
+        <p className="text-center text-lg text-gray-300">
+          将来的にはUI/UXも自分でデザインできるエンジニアを目指しています！
+        </p>
       </div>
     </section>
   );

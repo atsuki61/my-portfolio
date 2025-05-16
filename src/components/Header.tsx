@@ -14,6 +14,7 @@ const NAV_ITEMS = [
 
 export default function Header() {
   const [active, setActive] = useState('home');
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -21,6 +22,11 @@ export default function Header() {
       for (const { id } of NAV_ITEMS) {
         const sec = document.getElementById(id);
         if (sec && sec.offsetTop <= y) setActive(id);
+      }
+      if (window.scrollY > 50) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
       }
     };
     window.addEventListener('scroll', handleScroll);
@@ -39,19 +45,25 @@ export default function Header() {
     }
   };
 
+  const headerBaseClasses = "fixed top-0 w-full z-50 shadow-sm font-['Space_Grotesk'] transition-all duration-300";
+  const scrolledHeaderClasses = 'bg-[#1A1A2E] bg-opacity-80';
+  const defaultHeaderClasses = 'bg-blue-900';
+
+  const iconStyle = scrolled ? { color: '#60A5FA', filter: 'drop-shadow(0 0 5px #60A5FA)' } : { color: '#FFFFFF' };
+
   return (
-    <header className="fixed top-0 w-full bg-blue-900 z-50 shadow-sm font-['Space_Grotesk']">
+    <header className={`${headerBaseClasses} ${scrolled ? scrolledHeaderClasses : defaultHeaderClasses}`}>
       <div className="mx-auto max-w-4xl flex items-center justify-between p-4">
         <Link href="/" className="flex items-center">
           <Image src="/images/favicon-32x32.png" alt="Logo" width={32} height={32} className="mr-2" />
         </Link>
-        <nav className="flex gap-8">
-          <div className="flex space-x-4 mr-6 mt-1">
+        <nav className="flex gap-8 items-center">
+          <div className="flex space-x-4 mr-6">
             <a href="https://github.com/atsuki61" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-              <FaGithub className="w-5 h-5 hover:text-gray-600" />
+              <FaGithub className="w-5 h-5 transition-all duration-300" style={iconStyle} />
             </a>
             <a href="https://x.com/atsuki_prog_ai" target="_blank" rel="noopener noreferrer" aria-label="X">
-              <FaSquareXTwitter className="w-5 h-5 hover:text-gray-600" />
+              <FaSquareXTwitter className="w-5 h-5 transition-all duration-300" style={iconStyle} />
             </a>
           </div>
           {NAV_ITEMS.map(({ id, label }) => (
@@ -66,7 +78,8 @@ export default function Header() {
                     : '0 0 5px #0BF, 0 0 10px #0BF, 0 0 15px #8A2BE2, 0 0 20px #8A2BE2',
               }}
               className={`px-3 py-1 rounded-lg transition cursor-pointer 
-                ${active === id ? 'text-cyan-300 font-semibold' : 'text-white hover:text-cyan-300'}
+                ${active === id ? (scrolled ? 'text-cyan-300' : 'text-cyan-300') : scrolled ? 'text-white hover:text-cyan-300' : 'text-white hover:text-cyan-300'} 
+                ${active === id ? 'font-semibold' : ''}
               `}
             >
               {label}
