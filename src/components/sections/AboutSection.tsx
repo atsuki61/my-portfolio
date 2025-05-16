@@ -17,6 +17,11 @@ import { FaMusic, FaGamepad, FaLaptopCode, FaPlane, FaMobileAlt } from 'react-ic
 import { GiWeightLiftingUp, GiCupcake } from 'react-icons/gi';
 import type { ComponentType } from 'react';
 
+// Props の型定義
+interface AboutSectionProps {
+  particleColor: string;
+}
+
 const SKILLS = [
   { icon: SiHtml5, label: 'HTML' },
   { icon: SiCss3, label: 'CSS' },
@@ -73,12 +78,20 @@ function IconMarqueeSection({ title, items, speed }: { title?: string; items: It
   );
 }
 
-export default function AboutSection() {
+export default function AboutSection({ particleColor }: AboutSectionProps) {
   return (
     <section
       id="about"
-      className="relative py-20 bg-[var(--about-bg-color)] text-white diagonal-stripes"
+      // CSS変数による背景色と斜めストライプスタイルを適用
+      // `relative` は疑似要素 `::before` の絶対配置の基準となる
+      className="relative py-20 text-white diagonal-stripes transition-colors duration-1000"
+      style={{ backgroundColor: particleColor }}
     >
+      {/* 
+        コンテンツ全体をラップするdiv要素。
+        `relative` と `z-10` を指定することで、
+        `diagonal-stripes` の疑似要素 (z-index: 0) よりも手前に表示されるようにする。
+      */}
       <div className="relative z-10 max-w-5xl mx-auto px-4 space-y-12">
         <h2 className="text-4xl font-bold text-center font-['Space_Grotesk']">About Me</h2>
         <p className="text-center text-lg">

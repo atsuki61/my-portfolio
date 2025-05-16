@@ -2,6 +2,11 @@
 import Image from 'next/image';
 import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 
+// Props の型定義
+interface ProjectsSectionProps {
+  particleColor: string;
+}
+
 type Project = {
   id: string;
   title: string;
@@ -36,11 +41,15 @@ const PROJECTS: Project[] = [
   // 追加したいプロジェクトを増やせる
 ];
 
-export default function ProjectsSection() {
+export default function ProjectsSection({ particleColor }: ProjectsSectionProps) {
+  // particleColor を props で受け取る
   return (
     <section
       id="projects"
-      className="py-20 bg-[var(--projects-bg-color)] text-white"
+      // className="py-20 bg-[var(--projects-bg-color)] text-white" // 元の背景色指定をコメントアウトまたは削除
+      // particleColor を背景色として使用し、トランジション効果を追加
+      className="py-20 text-white transition-colors duration-1000 min-h-screen"
+      style={{ backgroundColor: particleColor }} // particleColor を style に適用
     >
       <div className="max-w-5xl mx-auto px-4 space-y-8">
         {/* セクション見出し */}

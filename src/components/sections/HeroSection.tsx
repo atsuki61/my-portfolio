@@ -3,46 +3,28 @@
 
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, Stars } from '@react-three/drei';
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import TextureSphere from '../TextureSphere';
 
-export default function HeroSection() {
-  // テクスチャ一覧を用意 - 各天体の特性も定義
-  const textures = useMemo(
-    () => [
-      {
-        name: '月',
-        url: '/images/moon.jpg',
-        color: '#1a1a2e', // 暗い青色の背景
-        rotationSpeed: 0.5, // 遅い回転
-        particleColor: '#ffffff', // 白い星
-      },
-      {
-        name: '地球',
-        url: '/images/earth.jpg',
-        color: '#0a3d62', // 深い青色の背景
-        rotationSpeed: 0.4, // 中程度の回転
-        particleColor: '#aaccff', // 青白い星
-      },
-      {
-        name: '太陽',
-        url: '/images/sun.jpg',
-        color: '#6a1b0a', // 赤褐色の背景
-        rotationSpeed: 0.4, // 速い回転
-        particleColor: '#ffcc66', // 黄色い星
-      },
-    ],
-    [],
-  );
+// Props の型定義
+interface HeroSectionProps {
+  textures: Array<{
+    name: string;
+    url: string;
+    color: string;
+    rotationSpeed: number;
+    particleColor: string;
+  }>;
+  idx: number;
+  next: () => void;
+  // particleColor?: string; // HeroSection は自身の背景色を textures[idx].color から取得するため、particleColor prop は任意または不要
+}
 
-  // 現在選択中のインデックス
-  const [idx, setIdx] = useState(0);
+export default function HeroSection({ textures, idx, next }: HeroSectionProps) {
+  // const textures = useMemo(...);
+
   // 現在の背景色とテーマ（トランジション用）
-  const [bgColor, setBgColor] = useState(textures[0].color);
-
-  // 次のテクスチャに切り替え
-  const next = () => setIdx((i) => (i + 1) % textures.length);
-
+  const [bgColor, setBgColor] = useState(textures[idx].color); // 初期値は props の idx と textures を使用
   // 惑星が変わったときに背景色をアニメーションで変更
   useEffect(() => {
     // 新しい背景色をセット
@@ -53,6 +35,7 @@ export default function HeroSection() {
     <section
       id="home"
       className="relative h-screen overflow-hidden transition-colors duration-1000 bg-[var(--home-bg-color)] cosmic-grid"
+      // stateで管理されるbgColorをインラインスタイルで適用し、背景色を動的に変更
       style={{ backgroundColor: bgColor }}
     >
       {/* スマホ: 縦積み (flex-col) / md以上: 横並び (flex-row) */}
@@ -89,7 +72,7 @@ export default function HeroSection() {
             <pointLight
               position={[5, 5, 5]}
               intensity={1.0}
-              color={textures[idx].particleColor}
+              color={textures[idx].particleColor} // props の particleColor を使用
             />
             <pointLight
               position={[-5, -5, -5]}
@@ -99,7 +82,7 @@ export default function HeroSection() {
             {/* 球体メッシュ（テクスチャ切り替え可能） */}
             <TextureSphere
               textureURL={textures[idx].url}
-              onClick={next}
+              onClick={next} // props の next を使用
               rotationSpeed={textures[idx].rotationSpeed}
             />
 

@@ -4,7 +4,13 @@ import { useForm } from 'react-hook-form';
 import { FormValues, formValidation } from '@/utils/validation';
 import { sendEmail } from '@/utils/sendEmail';
 
-export default function ContactSection() {
+// Props の型定義
+interface ContactSectionProps {
+  particleColor: string;
+}
+
+export default function ContactSection({ particleColor }: ContactSectionProps) {
+  // particleColor を props で受け取る
   // ① react-hook-form のセットアップ
   const {
     register,
@@ -27,7 +33,10 @@ export default function ContactSection() {
   return (
     <section
       id="contact"
-      className="py-20 bg-[var(--contact-bg-color)] text-white"
+      // className="py-20 bg-[var(--contact-bg-color)] text-white" // 元の背景色指定をコメントアウトまたは削除
+      // particleColor を背景色として使用し、トランジション効果を追加
+      className="py-20 text-white transition-colors duration-1000 min-h-screen"
+      style={{ backgroundColor: particleColor }} // particleColor を style に適用
     >
       <div className="max-w-lg mx-auto px-4">
         {/* セクション見出し */}
