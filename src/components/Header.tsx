@@ -14,14 +14,10 @@ const NAV_ITEMS = [
 ];
 
 export default function Header() {
-  // 現在アクティブなナビゲーションアイテムのIDを管理するstate
-  const [active, setActive] = useState('home');
-  // ページ上部から一定量スクロールしたかどうかを管理するstate
-  const [scrolled, setScrolled] = useState(false);
-  // 現在スクロール中かどうかを管理するstate
-  const [isScrolling, setIsScrolling] = useState(false);
-  // スクロール停止を検知するためのタイマーのIDを保持するref
-  const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const [active, setActive] = useState('home'); // 現在アクティブなナビゲーションアイテムのIDを管理するstate
+  const [scrolled, setScrolled] = useState(false); // ページ上部から一定量スクロールしたかどうかを管理するstate
+  const [isScrolling, setIsScrolling] = useState(false); // 現在スクロール中かどうかを管理するstate
+  const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null); // スクロール停止を検知するためのタイマーのIDを保持するref
 
   useEffect(() => {
     // スクロールイベントを処理する関数
@@ -81,7 +77,7 @@ export default function Header() {
   // ヘッダーの基本的なクラス
   const headerBaseClasses = "fixed top-0 w-full z-50 shadow-sm font-['Space_Grotesk'] transition-all duration-300";
   // スクロール中かどうかに基づいてヘッダーの背景色クラスを決定
-  const headerBgClass = isScrolling ? 'bg-black/20' : 'bg-black';
+  const headerBgClass = isScrolling ? 'bg-black/20' : 'bg-black/90';
 
   // スクロール状態に応じたアイコンのスタイル
   const iconStyle = scrolled ? { color: '#60A5FA', filter: 'drop-shadow(0 0 5px #60A5FA)' } : { color: '#FFFFFF' };

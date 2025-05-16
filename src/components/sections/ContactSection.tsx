@@ -25,16 +25,25 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contact" className="py-20 bg-[#1A1A2E] text-white">
+    <section
+      id="contact"
+      className="py-20 bg-[var(--contact-bg-color)] text-white"
+    >
       <div className="max-w-lg mx-auto px-4">
         {/* セクション見出し */}
         <h2 className="text-3xl font-bold text-center font-['Space_Grotesk']">Contact</h2>
 
         {/* ③ フォーム本体 */}
-        <form onSubmit={handleSubmit(onSubmit)} className="mt-6 space-y-4">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="mt-6 space-y-4"
+        >
           {/* 名前 */}
           <div>
-            <label htmlFor="name" className="block text-sm font-medium text-gray-300">
+            <label
+              htmlFor="name"
+              className="block text-sm font-medium text-gray-300"
+            >
               Name
             </label>
             <input
@@ -48,7 +57,10 @@ export default function ContactSection() {
 
           {/* メール */}
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-300">
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium text-gray-300"
+            >
               Email
             </label>
             <input
@@ -62,7 +74,10 @@ export default function ContactSection() {
 
           {/* メッセージ */}
           <div>
-            <label htmlFor="message" className="block text-sm font-medium text-gray-300">
+            <label
+              htmlFor="message"
+              className="block text-sm font-medium text-gray-300"
+            >
               Message
             </label>
             <textarea

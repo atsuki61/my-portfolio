@@ -38,7 +38,10 @@ const PROJECTS: Project[] = [
 
 export default function ProjectsSection() {
   return (
-    <section id="projects" className="py-20 bg-[#1A1A2E] text-white">
+    <section
+      id="projects"
+      className="py-20 bg-[var(--projects-bg-color)] text-white"
+    >
       <div className="max-w-5xl mx-auto px-4 space-y-8">
         {/* セクション見出し */}
         <h2 className="text-3xl font-bold text-center font-['Space_Grotesk']">Projects</h2>
@@ -46,10 +49,18 @@ export default function ProjectsSection() {
         {/* グリッドレイアウト */}
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {PROJECTS.map((proj) => (
-            <article key={proj.id} className="flex flex-col bg-gray-800 rounded-lg shadow hover:shadow-md transition">
+            <article
+              key={proj.id}
+              className="flex flex-col bg-gray-800 rounded-lg shadow hover:shadow-md transition"
+            >
               {/* ② 画像 */}
               <div className="relative h-48 w-full overflow-hidden rounded-t-lg">
-                <Image src={proj.image} alt={proj.title} fill className="object-cover" />
+                <Image
+                  src={proj.image}
+                  alt={proj.title}
+                  fill
+                  className="object-cover"
+                />
               </div>
 
               {/* コンテンツ */}
@@ -60,7 +71,10 @@ export default function ProjectsSection() {
                 {/* 技術スタック */}
                 <ul className="mt-4 flex flex-wrap gap-2">
                   {proj.techs.map((tech) => (
-                    <li key={tech} className="text-xs bg-gray-700 text-gray-200 px-2 py-1 rounded">
+                    <li
+                      key={tech}
+                      className="text-xs bg-gray-700 text-gray-200 px-2 py-1 rounded"
+                    >
                       {tech}
                     </li>
                   ))}

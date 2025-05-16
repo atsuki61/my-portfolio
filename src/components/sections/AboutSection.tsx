@@ -54,7 +54,10 @@ function IconMarqueeSection({ title, items, speed }: { title?: string; items: It
     <div>
       <h3 className="text-2xl font-semibold mb-4 text-center font-['Space_Grotesk']">{title}</h3>
       <div className="pt-2 pb-6 overflow-visible">
-        <Marquee {...MARQUEE_PROPS} speed={speed}>
+        <Marquee
+          {...MARQUEE_PROPS}
+          speed={speed}
+        >
           {items.map(({ icon: Icon, label }) => (
             <div
               key={label}
@@ -72,17 +75,27 @@ function IconMarqueeSection({ title, items, speed }: { title?: string; items: It
 
 export default function AboutSection() {
   return (
-    <section id="about" className="py-20 bg-[#1A1A2E] text-white">
-      <div className="max-w-5xl mx-auto px-4 space-y-12">
+    <section
+      id="about"
+      className="relative py-20 bg-[var(--about-bg-color)] text-white diagonal-stripes"
+    >
+      <div className="relative z-10 max-w-5xl mx-auto px-4 space-y-12">
         <h2 className="text-4xl font-bold text-center font-['Space_Grotesk']">About Me</h2>
         <p className="text-center text-lg">
           滋賀県出身の学生で、現在京都コンピュータ学院京都駅前校で Webアプリケーション開発を学んでいます。
         </p>
 
         {/* 技術スタック */}
-        <IconMarqueeSection title="Studying Skills＆Hobbies" items={SKILLS} speed={50} />
+        <IconMarqueeSection
+          title="Studying Skills＆Hobbies"
+          items={SKILLS}
+          speed={50}
+        />
         {/* 趣味・好きなこと */}
-        <IconMarqueeSection items={HOBBIES} speed={40} />
+        <IconMarqueeSection
+          items={HOBBIES}
+          speed={40}
+        />
 
         <p className="text-center text-lg text-gray-300">
           将来的にはUI/UXも自分でデザインできるエンジニアを目指しています！

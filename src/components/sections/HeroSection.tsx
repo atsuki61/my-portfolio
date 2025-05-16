@@ -52,7 +52,7 @@ export default function HeroSection() {
   return (
     <section
       id="home"
-      className="relative h-screen overflow-hidden transition-colors duration-1000"
+      className="relative h-screen overflow-hidden transition-colors duration-1000 bg-[var(--home-bg-color)] cosmic-grid"
       style={{ backgroundColor: bgColor }}
     >
       {/* スマホ: 縦積み (flex-col) / md以上: 横並び (flex-row) */}
@@ -69,17 +69,39 @@ export default function HeroSection() {
 
         {/* 右 2/3：3D Canvas */}
         <div className="w-full h-[70vh] md:h-auto md:w-2/3 relative">
-          <Canvas className="absolute inset-0" camera={{ position: [0, 0, 6], fov: 50 }}>
+          <Canvas
+            className="absolute inset-0"
+            camera={{ position: [0, 0, 6], fov: 50 }}
+          >
             {/* 背景の星空 */}
-            <Stars radius={100} depth={50} count={5000} factor={4} saturation={0} fade speed={1} />
+            <Stars
+              radius={100}
+              depth={50}
+              count={5000}
+              factor={4}
+              saturation={0}
+              fade
+              speed={1}
+            />
 
             {/* ライティング - 天体に合わせて色を変える */}
             <ambientLight intensity={3.5} />
-            <pointLight position={[5, 5, 5]} intensity={1.0} color={textures[idx].particleColor} />
-            <pointLight position={[-5, -5, -5]} intensity={0.2} />
+            <pointLight
+              position={[5, 5, 5]}
+              intensity={1.0}
+              color={textures[idx].particleColor}
+            />
+            <pointLight
+              position={[-5, -5, -5]}
+              intensity={0.2}
+            />
 
             {/* 球体メッシュ（テクスチャ切り替え可能） */}
-            <TextureSphere textureURL={textures[idx].url} onClick={next} rotationSpeed={textures[idx].rotationSpeed} />
+            <TextureSphere
+              textureURL={textures[idx].url}
+              onClick={next}
+              rotationSpeed={textures[idx].rotationSpeed}
+            />
 
             {/* マウスドラッグで視点操作 */}
             <OrbitControls enableZoom={false} />
