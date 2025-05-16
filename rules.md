@@ -6,7 +6,7 @@ Rule Name: step-by-step
 Description: 大きな機能は小さなタスクに分解し、順序立てて提示する
 
 Rule Name: code-with-comments
-Description: コード例には日本語のコメント（実行時にはコメントアウト）を付け、意図や機能を明確にする
+Description: コード例には日本語のコメントを付け、意図や機能を明確にする
 
 Rule Name: clear-explanation
 Description: コード提示前に目的と手順を簡潔に説明する
