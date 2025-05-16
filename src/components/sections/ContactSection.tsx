@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { useForm } from "react-hook-form";
-import { FormValues, formValidation } from "@/utils/validation";
-import { sendEmail } from "@/utils/sendEmail";
+import { useForm } from 'react-hook-form';
+import { FormValues, formValidation } from '@/utils/validation';
+import { sendEmail } from '@/utils/sendEmail';
 
 export default function ContactSection() {
   // ① react-hook-form のセットアップ
@@ -28,7 +28,7 @@ export default function ContactSection() {
     <section id="contact" className="py-20 bg-white text-black">
       <div className="max-w-lg mx-auto px-4">
         {/* セクション見出し */}
-        <h2 className="text-3xl font-bold text-center">Contact</h2>
+        <h2 className="text-3xl font-bold text-center font-['Space_Grotesk']">Contact</h2>
 
         {/* ③ フォーム本体 */}
         <form onSubmit={handleSubmit(onSubmit)} className="mt-6 space-y-4">
@@ -40,12 +40,10 @@ export default function ContactSection() {
             <input
               id="name"
               type="text"
-              {...register("name", formValidation.name)}
+              {...register('name', formValidation.name)}
               className="mt-1 block w-full border border-gray-300 rounded p-2"
             />
-            {errors.name && (
-              <p className="text-red-600 text-sm mt-1">{errors.name.message}</p>
-            )}
+            {errors.name && <p className="text-red-600 text-sm mt-1">{errors.name.message}</p>}
           </div>
 
           {/* メール */}
@@ -56,12 +54,10 @@ export default function ContactSection() {
             <input
               id="email"
               type="email"
-              {...register("email", formValidation.email)}
+              {...register('email', formValidation.email)}
               className="mt-1 block w-full border border-gray-300 rounded p-2"
             />
-            {errors.email && (
-              <p className="text-red-600 text-sm mt-1">{errors.email.message}</p>
-            )}
+            {errors.email && <p className="text-red-600 text-sm mt-1">{errors.email.message}</p>}
           </div>
 
           {/* メッセージ */}
@@ -72,14 +68,10 @@ export default function ContactSection() {
             <textarea
               id="message"
               rows={4}
-              {...register("message", formValidation.message)}
+              {...register('message', formValidation.message)}
               className="mt-1 block w-full border border-gray-300 rounded p-2"
             />
-            {errors.message && (
-              <p className="text-red-600 text-sm mt-1">
-                {errors.message.message}
-              </p>
-            )}
+            {errors.message && <p className="text-red-600 text-sm mt-1">{errors.message.message}</p>}
           </div>
 
           {/* 送信ボタン */}
@@ -88,7 +80,7 @@ export default function ContactSection() {
             disabled={isSubmitting}
             className="w-full bg-black text-white py-2 rounded hover:bg-gray-800 transition"
           >
-            {isSubmitting ? "送信中…" : "送信"}
+            {isSubmitting ? '送信中…' : '送信'}
           </button>
         </form>
       </div>

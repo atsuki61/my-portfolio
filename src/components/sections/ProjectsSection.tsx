@@ -1,38 +1,38 @@
 // src/components/sections/ProjectsSection.tsx
-import Image from "next/image";
-import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
+import Image from 'next/image';
+import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 
 type Project = {
   id: string;
   title: string;
   description: string;
-  image: string;       // public/images 以下に配置する想定
-  techs: string[];     // 技術スタックのラベル
-  github?: string;     // GitHub リポジトリ URL
-  live?: string;       // デモサイト URL
+  image: string; // public/images 以下に配置する想定
+  techs: string[]; // 技術スタックのラベル
+  github?: string; // GitHub リポジトリ URL
+  live?: string; // デモサイト URL
 };
 
 // ① ここにプロジェクトデータを追加していく
 const PROJECTS: Project[] = [
   {
-    id: "proj1",
-    title: "ポートフォリオサイト",
-    description: "Next.js、TypeScript、Tailwind CSSを使ったポートフォリオサイトです。",
-    image: "/images/portfolio.png",
-    techs: ["Next.js", "TypeScript", "Tailwind CSS"],
-    github: "https://github.com/atsuki61/my-portfolio",
-    live: "https://my-portfolio-drab-zeta-67.vercel.app/",
+    id: 'proj1',
+    title: 'ポートフォリオサイト',
+    description: 'Next.js、TypeScript、Tailwind CSSを使ったポートフォリオサイトです。',
+    image: '/images/portfolio.png',
+    techs: ['Next.js', 'TypeScript', 'Tailwind CSS'],
+    github: 'https://github.com/atsuki61/my-portfolio',
+    live: 'https://my-portfolio-drab-zeta-67.vercel.app/',
   },
   {
-    id: "proj2",
-    title: "ToDo アプリ",
-    description: "シンプルなToDoアプリです。",
-    image: "/images/todo.png",
-    techs: ["HTML", "CSS", "JavaScript"],
-    github:"https://github.com/atsuki61/todo-app",
-    live: "https://todo-app-virid-pi-51.vercel.app/",
-    }
-    
+    id: 'proj2',
+    title: 'ToDo アプリ',
+    description: 'シンプルなToDoアプリです。',
+    image: '/images/todo.png',
+    techs: ['HTML', 'CSS', 'JavaScript'],
+    github: 'https://github.com/atsuki61/todo-app',
+    live: 'https://todo-app-virid-pi-51.vercel.app/',
+  },
+
   // 追加したいプロジェクトを増やせる
 ];
 
@@ -41,23 +41,15 @@ export default function ProjectsSection() {
     <section id="projects" className="py-20 bg-white text-black">
       <div className="max-w-5xl mx-auto px-4 space-y-8">
         {/* セクション見出し */}
-        <h2 className="text-3xl font-bold text-center">Projects</h2>
+        <h2 className="text-3xl font-bold text-center font-['Space_Grotesk']">Projects</h2>
 
         {/* グリッドレイアウト */}
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {PROJECTS.map((proj) => (
-            <article
-              key={proj.id}
-              className="flex flex-col bg-gray-50 rounded-lg shadow hover:shadow-md transition"
-            >
+            <article key={proj.id} className="flex flex-col bg-gray-50 rounded-lg shadow hover:shadow-md transition">
               {/* ② 画像 */}
               <div className="relative h-48 w-full overflow-hidden rounded-t-lg">
-                <Image
-                  src={proj.image}
-                  alt={proj.title}
-                  fill
-                  className="object-cover"
-                />
+                <Image src={proj.image} alt={proj.title} fill className="object-cover" />
               </div>
 
               {/* コンテンツ */}
@@ -68,10 +60,7 @@ export default function ProjectsSection() {
                 {/* 技術スタック */}
                 <ul className="mt-4 flex flex-wrap gap-2">
                   {proj.techs.map((tech) => (
-                    <li
-                      key={tech}
-                      className="text-xs bg-gray-200 px-2 py-1 rounded"
-                    >
+                    <li key={tech} className="text-xs bg-gray-200 px-2 py-1 rounded">
                       {tech}
                     </li>
                   ))}

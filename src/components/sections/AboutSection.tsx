@@ -52,7 +52,7 @@ type ItemType = { icon: ComponentType<{ className?: string }>; label: string };
 function IconMarqueeSection({ title, items, speed }: { title?: string; items: ItemType[]; speed: number }) {
   return (
     <div>
-      <h3 className="text-2xl font-semibold mb-4 text-center">{title}</h3>
+      <h3 className="text-2xl font-semibold mb-4 text-center font-['Space_Grotesk']">{title}</h3>
       <div className="pt-5 pb-12 overflow-visible">
         <Marquee {...MARQUEE_PROPS} speed={speed}>
           {items.map(({ icon: Icon, label }) => (
@@ -74,7 +74,7 @@ export default function AboutSection() {
   return (
     <section id="about" className="py-20 bg-white text-black">
       <div className="max-w-5xl mx-auto px-4 space-y-12">
-        <h2 className="text-4xl font-bold text-center">About Me</h2>
+        <h2 className="text-4xl font-bold text-center font-['Space_Grotesk']">About Me</h2>
         <p className="text-center text-lg">
           滋賀県出身の学生で、現在京都コンピュータ学院京都駅前校で Webアプリケーション開発を学んでいます。
         </p>

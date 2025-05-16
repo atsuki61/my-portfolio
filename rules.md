@@ -6,7 +6,7 @@ Rule Name: step-by-step
 Description: 大きな機能は小さなタスクに分解し、順序立てて提示する
 
 Rule Name: code-with-comments
-Description: コード例には日本語のコメントを付け、意図や機能を明確にする
+Description: コードには日本語でコメントを記述し、コードが読めなくても意図や機能が理解できるようにする。。
 
 Rule Name: clear-explanation
 Description: コード提示前に目的と手順を簡潔に説明する
@@ -21,5 +21,9 @@ Rule Name: beginner-naming
 Description: 分かりやすい命名（camelCase, PascalCaseなど）を強調する
 
 Rule Name: git-best-practice
-Description: 変更ごとにコミット例とコミットメッセージを簡潔に提示する（日本語で）
+Description: 変更ごとにコミット例とコミットメッセージをわかりやすく簡潔に提示する（日本語で）
+
+Rule Name: outline-feature-comments
+Description: コード生成時に、各機能の概要をコメントアウトで記述する
+
 </cursor_rules_context>
