@@ -3,12 +3,31 @@
 @import 'tailwindcss';
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+  /* --- 背景デザイン --- */
+  /* 宇宙グリッド風の背景スタイル */
+  .cosmic-grid {
+    background-image:
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 31px,
+        rgba(255, 255, 255, 0.05) 31px,
+        rgba(255, 255, 255, 0.05) 32px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        /* 垂直線 */ transparent,
+        transparent 31px,
+        rgba(255, 255, 255, 0.05) 31px,
+        rgba(255, 255, 255, 0.05) 32px
+      );
+    background-size: 32px 32px; /* グリッドの1マスのサイズ */
+  }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: 'Space Grotesk', 'Noto Sans JP', Arial, Helvetica, sans-serif;
+  /* --- 基本的なbodyスタイル --- */
+  body {
+    background: var(--background); /* 明るい背景をデフォルトに */
+    color: var(--foreground); /* 標準テキスト色 */
+    font-family: 'Space Grotesk', 'Noto Sans JP', Arial, Helvetica, sans-serif; /* フォント設定 */
+  }
 }
