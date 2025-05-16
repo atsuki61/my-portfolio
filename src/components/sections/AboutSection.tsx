@@ -37,6 +37,12 @@ const HOBBIES = [
   { icon: FaMobileAlt, label: 'ガジェット' },
 ];
 
+const MARQUEE_PROPS = {
+  className: 'h-[10rem] overflow-visible',
+  gradient: false,
+  pauseOnHover: false,
+};
+
 export default function AboutSection() {
   return (
     <section id="about" className="py-20 bg-white text-black">
@@ -48,9 +54,9 @@ export default function AboutSection() {
 
         {/* 技術スタック */}
         <div>
-          <h3 className="text-2xl font-semibold mb-6 text-center">Studying Skills</h3>
-          <div className="pt-12 pb-12 overflow-visible">
-            <Marquee className="h-[10rem] overflow-visible" gradient={false} speed={50} pauseOnHover={false}>
+          <h3 className="text-2xl font-semibold mb-6 text-center">Studying Skills＆Hobbies</h3>
+          <div className="pt-5 pb-12 overflow-visible">
+            <Marquee {...MARQUEE_PROPS} speed={50}>
               {SKILLS.map(({ icon: Icon, label }) => (
                 <div
                   key={label}
@@ -69,9 +75,9 @@ export default function AboutSection() {
 
         {/* 趣味・好きなこと */}
         <div>
-          <h3 className="text-2xl font-semibold mb-6 text-center">趣味・好きなこと</h3>
-          <div className="pt-12 pb-12 overflow-visible">
-            <Marquee className="h-[10rem] overflow-visible" gradient={false} speed={40} pauseOnHover={false}>
+          <h3 className="text-2xl font-semibold mb-6 text-center"></h3>
+          <div className="pt-5 pb-12 overflow-visible">
+            <Marquee {...MARQUEE_PROPS} speed={40}>
               {HOBBIES.map(({ icon: Icon, label }) => (
                 <div
                   key={label}
