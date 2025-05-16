@@ -3,8 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
-import { Github } from 'lucide-react';
-import { FaSquareXTwitter } from 'react-icons/fa6';
+import { FaSquareXTwitter, FaGithub } from 'react-icons/fa6';
 
 const NAV_ITEMS = [
   { id: 'home', label: 'Home' },
@@ -47,9 +46,9 @@ export default function Header() {
           <Image src="/images/favicon-32x32.png" alt="Logo" width={32} height={32} className="mr-2" />
         </Link>
         <nav className="flex gap-8">
-          <div className="flex space-x-4 mr-6">
+          <div className="flex space-x-4 mr-6 mt-1">
             <a href="https://github.com/atsuki61" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-              <Github className="w-5 h-5 hover:text-gray-600" />
+              <FaGithub className="w-5 h-5 hover:text-gray-600" />
             </a>
             <a href="https://x.com/atsuki_prog_ai" target="_blank" rel="noopener noreferrer" aria-label="X">
               <FaSquareXTwitter className="w-5 h-5 hover:text-gray-600" />
