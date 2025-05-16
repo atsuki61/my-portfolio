@@ -15,6 +15,7 @@ import {
 import { MdMovie } from 'react-icons/md';
 import { FaMusic, FaGamepad, FaLaptopCode, FaPlane, FaMobileAlt } from 'react-icons/fa';
 import { GiWeightLiftingUp, GiCupcake } from 'react-icons/gi';
+import type { ComponentType } from 'react';
 
 const SKILLS = [
   { icon: SiHtml5, label: 'HTML' },
@@ -43,6 +44,32 @@ const MARQUEE_PROPS = {
   pauseOnHover: false,
 };
 
+// アイテム配列の型定義
+// ItemTypeはアイコンとラベルを保持する
+type ItemType = { icon: ComponentType<{ className?: string }>; label: string };
+
+// マーキー表示用の汎用コンポーネント
+function IconMarqueeSection({ title, items, speed }: { title?: string; items: ItemType[]; speed: number }) {
+  return (
+    <div>
+      <h3 className="text-2xl font-semibold mb-4 text-center">{title}</h3>
+      <div className="pt-5 pb-12 overflow-visible">
+        <Marquee {...MARQUEE_PROPS} speed={speed}>
+          {items.map(({ icon: Icon, label }) => (
+            <div
+              key={label}
+              className="flex flex-col items-center flex-shrink-0 mx-12 transform transition-transform duration-300 hover:scale-110"
+            >
+              <Icon className="w-24 h-24 mb-3" />
+              <span className="text-base">{label}</span>
+            </div>
+          ))}
+        </Marquee>
+      </div>
+    </div>
+  );
+}
+
 export default function AboutSection() {
   return (
     <section id="about" className="py-20 bg-white text-black">
@@ -53,45 +80,9 @@ export default function AboutSection() {
         </p>
 
         {/* 技術スタック */}
-        <div>
-          <h3 className="text-2xl font-semibold mb-6 text-center">Studying Skills＆Hobbies</h3>
-          <div className="pt-5 pb-12 overflow-visible">
-            <Marquee {...MARQUEE_PROPS} speed={50}>
-              {SKILLS.map(({ icon: Icon, label }) => (
-                <div
-                  key={label}
-                  className="flex flex-col items-center flex-shrink-0
-                             mx-12 transform transition-transform duration-300
-                             hover:scale-110"
-                >
-                  {/* 大きめのアイコンサイズ */}
-                  <Icon className="w-24 h-24 mb-3" />
-                  <span className="text-base">{label}</span>
-                </div>
-              ))}
-            </Marquee>
-          </div>
-        </div>
-
+        <IconMarqueeSection title="Studying Skills＆Hobbies" items={SKILLS} speed={50} />
         {/* 趣味・好きなこと */}
-        <div>
-          <h3 className="text-2xl font-semibold mb-6 text-center"></h3>
-          <div className="pt-5 pb-12 overflow-visible">
-            <Marquee {...MARQUEE_PROPS} speed={40}>
-              {HOBBIES.map(({ icon: Icon, label }) => (
-                <div
-                  key={label}
-                  className="flex flex-col items-center flex-shrink-0
-                             mx-12 transform transition-transform duration-300
-                             hover:scale-110"
-                >
-                  <Icon className="w-24 h-24 mb-3" />
-                  <span className="text-base">{label}</span>
-                </div>
-              ))}
-            </Marquee>
-          </div>
-        </div>
+        <IconMarqueeSection items={HOBBIES} speed={40} />
 
         <p className="text-center text-lg">将来的にはUI/UXも自分でデザインできるエンジニアを目指しています！</p>
       </div>
