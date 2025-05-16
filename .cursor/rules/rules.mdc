@@ -28,4 +28,7 @@ Description: 分かりやすい命名（camelCase, PascalCaseなど）を強調�
 Rule Name: git-best-practice
 Description: 変更ごとにコミット例とコミットメッセージを簡潔に提示する（日本語で）
 
+Rule Name: outline-feature-comments
+Description: コード生成時に、各機能の概要をコメントアウトで記述する
+
 </cursor_rules_context>
