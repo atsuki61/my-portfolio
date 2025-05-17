@@ -4,67 +4,73 @@ import { useForm } from 'react-hook-form';
 import { FormValues, formValidation } from '@/utils/validation';
 import { sendEmail } from '@/utils/sendEmail';
 
-// Props の型定義
+// このコンポーネントが受け取る情報（props）の形を定義しています。
+// particleColor: パーティクルの色を文字列で指定します。
 interface ContactSectionProps {
   particleColor: string;
 }
 
+// 「Contact」セクションを表示するための主要なコンポーネントです。
 export default function ContactSection({ particleColor }: ContactSectionProps) {
-  // particleColor を props で受け取る
-  // ① react-hook-form のセットアップ
+  // react-hook-form を使ってフォームの値を管理したり、入力チェック（バリデーション）を簡単に行うための準備をします。
   const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors, isSubmitting },
-  } = useForm<FormValues>();
+    register, // input や textarea 要素を react-hook-form に登録する関数
+    handleSubmit, // フォーム送信時に実行される関数をラップする関数
+    reset, // フォームの内容をリセットする関数
+    formState: { errors, isSubmitting }, // フォームの状態（エラー情報や送信中かどうか）
+  } = useForm<FormValues>(); // FormValues はフォームの入力項目とその型を定義したもの
 
-  // ② フォーム送信時の処理
+  // フォームが送信されたときに実行される処理です。
+  // data にはフォームに入力された値が入っています。
   const onSubmit = async (data: FormValues) => {
+    // sendEmail関数を使って、入力されたデータをメールで送信します。
     const result = await sendEmail(data);
     if (result.success) {
-      alert(result.message);
-      reset(); // フォームをクリア
+      // 送信成功時
+      alert(result.message); // 成功メッセージを表示
+      reset(); // フォームの内容を空にする
     } else {
-      alert(result.message);
+      // 送信失敗時
+      alert(result.message); // 失敗メッセージを表示
     }
   };
 
   return (
+    // セクション全体を囲む部分です。背景色や余白、最小の高さを設定しています。
     <section
-      id="contact"
-      // className="py-20 bg-[var(--contact-bg-color)] text-white" // 元の背景色指定をコメントアウトまたは削除
-      // particleColor を背景色として使用し、トランジション効果を追加
-      className="py-20 text-white transition-colors duration-1000 min-h-screen"
-      style={{ backgroundColor: particleColor }} // particleColor を style に適用
+      id="contact" // ページ内リンクのためのID
+      className="py-20 text-white transition-colors duration-1000 min-h-screen" // スタイルを指定
+      style={{ backgroundColor: particleColor }} // 背景色を動的に変更
     >
+      {/* セクション内のコンテンツを中央に配置し、横幅を制限します。 */}
       <div className="max-w-lg mx-auto px-4">
-        {/* セクション見出し */}
+        {/* セクションのタイトル「Contact」を表示します。 */}
         <h2 className="text-3xl font-bold text-center font-['Space_Grotesk']">Contact</h2>
 
-        {/* ③ フォーム本体 */}
+        {/* お問い合わせフォーム本体です。送信時に onSubmit 関数が呼ばれます。 */}
         <form
-          onSubmit={handleSubmit(onSubmit)}
-          className="mt-6 space-y-4"
+          onSubmit={handleSubmit(onSubmit)} // フォーム送信時の処理を指定
+          className="mt-6 space-y-4" // フォームのスタイル
         >
-          {/* 名前 */}
+          {/* 「Name」入力フィールドの部分です。 */}
           <div>
             <label
-              htmlFor="name"
-              className="block text-sm font-medium text-gray-300"
+              htmlFor="name" // input要素とラベルを関連付ける
+              className="block text-sm font-medium text-gray-300" // ラベルのスタイル
             >
               Name
             </label>
             <input
-              id="name"
-              type="text"
-              {...register('name', formValidation.name)}
-              className="mt-1 block w-full border border-gray-600 rounded p-2 bg-gray-700 text-white placeholder-gray-400 focus:border-blue-500 focus:ring-blue-500"
+              id="name" // label の htmlFor と対応
+              type="text" // 入力の種類はテキスト
+              {...register('name', formValidation.name)} // react-hook-form に 'name' として登録し、入力ルールも指定
+              className="mt-1 block w-full border border-gray-600 rounded p-2 bg-gray-700 text-white placeholder-gray-400 focus:border-blue-500 focus:ring-blue-500" // 入力フィールドのスタイル
             />
+            {/* 'name' フィールドに入力エラーがある場合にメッセージを表示します。 */}
             {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>}
           </div>
 
-          {/* メール */}
+          {/* 「Email」入力フィールドの部分です。 */}
           <div>
             <label
               htmlFor="email"
@@ -78,10 +84,11 @@ export default function ContactSection({ particleColor }: ContactSectionProps) {
               {...register('email', formValidation.email)}
               className="mt-1 block w-full border border-gray-600 rounded p-2 bg-gray-700 text-white placeholder-gray-400 focus:border-blue-500 focus:ring-blue-500"
             />
+            {/* 'email' フィールドに入力エラーがある場合にメッセージを表示します。 */}
             {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>}
           </div>
 
-          {/* メッセージ */}
+          {/* 「Message」入力フィールド（複数行テキストエリア）の部分です。 */}
           <div>
             <label
               htmlFor="message"
@@ -91,19 +98,21 @@ export default function ContactSection({ particleColor }: ContactSectionProps) {
             </label>
             <textarea
               id="message"
-              rows={4}
+              rows={4} // 表示する行数
               {...register('message', formValidation.message)}
               className="mt-1 block w-full border border-gray-600 rounded p-2 bg-gray-700 text-white placeholder-gray-400 focus:border-blue-500 focus:ring-blue-500"
             />
+            {/* 'message' フィールドに入力エラーがある場合にメッセージを表示します。 */}
             {errors.message && <p className="text-red-500 text-sm mt-1">{errors.message.message}</p>}
           </div>
 
-          {/* 送信ボタン */}
+          {/* 送信ボタンです。 */}
           <button
-            type="submit"
-            disabled={isSubmitting}
-            className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition disabled:bg-gray-500"
+            type="submit" // ボタンの種類を送信ボタンに指定
+            disabled={isSubmitting} // 送信中はボタンを押せないようにする
+            className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition disabled:bg-gray-500" // ボタンのスタイル
           >
+            {/* 送信中かどうかでボタンのテキストを切り替えます。 */}
             {isSubmitting ? '送信中…' : '送信'}
           </button>
         </form>

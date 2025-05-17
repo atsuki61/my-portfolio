@@ -13,111 +13,147 @@ const NAV_ITEMS = [
   { id: 'contact', label: 'Contact' },
 ];
 
+// サイトのヘッダー（一番上の部分）を表示するためのコンポーネントです。
 export default function Header() {
-  const [active, setActive] = useState('home'); // 現在アクティブなナビゲーションアイテムのIDを管理するstate
-  const [scrolled, setScrolled] = useState(false); // ページ上部から一定量スクロールしたかどうかを管理するstate
-  const [isScrolling, setIsScrolling] = useState(false); // 現在スクロール中かどうかを管理するstate
-  const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null); // スクロール停止を検知するためのタイマーのIDを保持するref
+  // useState: コンポーネント内で状態（変化するデータ）を管理するためのフックです。
+  const [active, setActive] = useState('home'); // 現在選択されているナビゲーション項目のID (初期値: 'home')
+  const [scrolled, setScrolled] = useState(false); // ページがスクロールされたかどうか (初期値: false)
+  const [isScrolling, setIsScrolling] = useState(false); // 現在スクロール操作中かどうか (初期値: false)
+  // useRef: DOM要素やミュータブルな値を保持するためのフックです。ここではタイマーIDを保持します。
+  const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
+  // useEffect: 副作用（DOM操作、API通信、イベントリスナーの登録など）を実行するためのフックです。
+  // このuseEffectは、コンポーネントが最初に表示された後（マウント後）に一度だけ実行されます。
   useEffect(() => {
-    // スクロールイベントを処理する関数
+    // スクロールイベントが発生したときに実行される関数です。
     const handleScroll = () => {
-      // スクロール位置に基づいてアクティブなナビゲーションセクションを更新
-      const y = window.scrollY + window.innerHeight / 3;
+      // 現在のスクロール位置に基づいて、ナビゲーションのどの項目がアクティブかを判断します。
+      const y = window.scrollY + window.innerHeight / 3; // スクロール位置の判定基準となるY座標
       for (const { id } of NAV_ITEMS) {
-        const sec = document.getElementById(id);
-        if (sec && sec.offsetTop <= y) setActive(id);
+        const sec = document.getElementById(id); // 各セクションのDOM要素を取得
+        if (sec && sec.offsetTop <= y) setActive(id); // セクションが判定基準より上にあればアクティブにする
       }
 
-      // ページ上部からのスクロール量に応じてscrolled stateを更新
+      // ページが50px以上スクロールされたら `scrolled` の状態を true にします。
       if (window.scrollY > 50) {
         setScrolled(true);
       } else {
         setScrolled(false);
       }
 
-      // スクロール中状態の管理
-      setIsScrolling(true); // スクロールが検知されたらisScrollingをtrueに設定
-      // 既存のタイマーがあればクリア
+      // スクロール中の状態を管理し、背景の透明度を調整します。
+      setIsScrolling(true); // スクロール開始
       if (scrollTimeoutRef.current) {
-        clearTimeout(scrollTimeoutRef.current);
+        clearTimeout(scrollTimeoutRef.current); // 既にタイマーがあればリセット
       }
-      // 新しいタイマーを設定し、150ms後にisScrollingをfalseに設定
+      // 150ミリ秒後にスクロールが止まったと判断し、isScrollingをfalseに戻します。
       scrollTimeoutRef.current = setTimeout(() => {
         setIsScrolling(false);
       }, 150);
     };
 
-    // スクロールイベントリスナーを追加
+    // windowオブジェクトにスクロールイベントリスナーを追加します。
     window.addEventListener('scroll', handleScroll);
 
-    // コンポーネントのクリーンアップ時にイベントリスナーとタイマーを削除
+    // コンポーネントが画面から消えるとき（アンマウント時）に実行されるクリーンアップ関数です。
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('scroll', handleScroll); // イベントリスナーを削除
       if (scrollTimeoutRef.current) {
-        clearTimeout(scrollTimeoutRef.current);
+        clearTimeout(scrollTimeoutRef.current); // タイマーをクリア
       }
     };
-  }, []);
+  }, []); // 第2引数が空配列なので、マウント時とアンマウント時にのみ実行されます。
 
-  // ナビゲーションアイテムクリック時の処理
+  // ナビゲーション項目がクリックされたときに実行される関数です。
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
-    e.preventDefault(); // デフォルトのアンカー動作をキャンセル
-    const element = document.getElementById(id); // 対応するセクション要素を取得
+    e.preventDefault(); // リンクのデフォルトの挙動（ページ遷移）を抑制します。
+    const element = document.getElementById(id); // クリックされた項目のIDに対応するDOM要素を取得します。
     if (element) {
-      // スムーズスクロールでセクションへ移動
+      // 取得した要素の位置までスムーズにスクロールします。
       element.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start',
+        behavior: 'smooth', // スムーズスクロールを指定
+        block: 'start', // 要素の上端をビューポートの上端に合わせる
       });
-      setActive(id); // クリックされたアイテムをアクティブに設定
+      setActive(id); // クリックされた項目をアクティブ状態にします。
     }
   };
 
-  // ヘッダーの基本的なクラス
+  // ヘッダーの基本的なCSSクラスです。位置、重ね順、影、フォント、アニメーション効果などを指定しています。
   const headerBaseClasses = "fixed top-0 w-full z-50 shadow-sm font-['Space_Grotesk'] transition-all duration-300";
-  // スクロール中かどうかに基づいてヘッダーの背景色クラスを決定
-  const headerBgClass = isScrolling ? 'bg-black/20' : 'bg-black/90';
+  // スクロール中かどうかに応じて、ヘッダーの背景色と透明度を動的に変更します。
+  const headerBgClass = isScrolling ? 'bg-black/20' : 'bg-black/90'; // スクロール中は薄く、停止中は濃く
 
-  // スクロール状態に応じたアイコンのスタイル
+  // スクロール状態に応じてアイコンの色とドロップシャドウを動的に変更します。
   const iconStyle = scrolled ? { color: '#60A5FA', filter: 'drop-shadow(0 0 5px #60A5FA)' } : { color: '#FFFFFF' };
 
   return (
-    // headerBaseClasses と headerBgClass を組み合わせてヘッダーのクラスを設定
+    // ヘッダー要素です。基本クラスと動的な背景クラスを組み合わせて適用します。
     <header className={`${headerBaseClasses} ${headerBgClass}`}>
+      {/* ヘッダーの内容を中央に配置し、横幅を制限します。 */}
       <div className="mx-auto max-w-4xl flex items-center justify-between p-4">
-        <Link href="/" className="flex items-center">
-          <Image src="/images/favicon-32x32.png" alt="Logo" width={32} height={32} className="mr-2" />
+        {/* ロゴ画像へのリンクです。クリックするとトップページに戻ります。 */}
+        <Link
+          href="/"
+          className="flex items-center"
+        >
+          <Image
+            src="/images/favicon-32x32.png"
+            alt="Logo"
+            width={32}
+            height={32}
+            className="mr-2"
+          />
         </Link>
+        {/* ナビゲーションメニュー全体です。 */}
         <nav className="flex gap-8 items-center">
-          {/* SNSアイコンエリア */}
+          {/* SNSアイコン（GitHub、X）を表示するエリアです。 */}
           <div className="flex space-x-4 mr-6">
-            <a href="https://github.com/atsuki61" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-              <FaGithub className="w-5 h-5 transition-all duration-300" style={iconStyle} />
+            {/* GitHubへのリンクアイコン */}
+            <a
+              href="https://github.com/atsuki61"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub"
+            >
+              <FaGithub
+                className="w-5 h-5 transition-all duration-300"
+                style={iconStyle}
+              />
             </a>
-            <a href="https://x.com/atsuki_prog_ai" target="_blank" rel="noopener noreferrer" aria-label="X">
-              <FaSquareXTwitter className="w-5 h-5 transition-all duration-300" style={iconStyle} />
+            {/* X (旧Twitter) へのリンクアイコン */}
+            <a
+              href="https://x.com/atsuki_prog_ai"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="X"
+            >
+              <FaSquareXTwitter
+                className="w-5 h-5 transition-all duration-300"
+                style={iconStyle}
+              />
             </a>
           </div>
-          {/* ナビゲーションリンク */}
+          {/* 定義したナビゲーション項目を一つずつ表示します。 */}
           {NAV_ITEMS.map(({ id, label }) => (
+            // 各ナビゲーション項目へのリンクです。
             <a
-              key={id}
-              href={`#${id}`}
-              onClick={(e) => handleNavClick(e, id)}
+              key={id} // Reactがリストの各要素を区別するためのキー
+              href={`#${id}`} // ページ内リンクのURL
+              onClick={(e) => handleNavClick(e, id)} // クリック時の処理
               style={{
-                // アクティブなナビゲーションアイテムのテキストシャドウ効果
+                // アクティブな項目にテキストシャドウを適用して目立たせます。
                 textShadow:
                   active === id
-                    ? '0 0 8px #0AF, 0 0 15px #0AF, 0 0 20px #A0F, 0 0 30px #A0F'
-                    : '0 0 5px #0BF, 0 0 10px #0BF, 0 0 15px #8A2BE2, 0 0 20px #8A2BE2',
+                    ? '0 0 8px #0AF, 0 0 15px #0AF, 0 0 20px #A0F, 0 0 30px #A0F' // アクティブ時のシャドウ
+                    : '0 0 5px #0BF, 0 0 10px #0BF, 0 0 15px #8A2BE2, 0 0 20px #8A2BE2', // 非アクティブ時のシャドウ
               }}
+              // 条件に応じてCSSクラスを動的に変更します。
               className={`px-3 py-1 rounded-lg transition cursor-pointer 
                 ${active === id ? (scrolled ? 'text-cyan-300' : 'text-cyan-300') : scrolled ? 'text-white hover:text-cyan-300' : 'text-white hover:text-cyan-300'} 
                 ${active === id ? 'font-semibold' : ''}
               `}
             >
-              {label}
+              {label} {/* メニューのテキストを表示 */}
             </a>
           ))}
         </nav>
