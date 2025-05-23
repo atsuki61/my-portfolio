@@ -1,7 +1,5 @@
 'use client';
 
-import Link from 'next/link';
-import Image from 'next/image';
 import { useState, useEffect, useRef } from 'react';
 import { FaSquareXTwitter, FaGithub } from 'react-icons/fa6';
 
@@ -90,24 +88,11 @@ export default function Header() {
     // ヘッダー要素です。基本クラスと動的な背景クラスを組み合わせて適用します。
     <header className={`${headerBaseClasses} ${headerBgClass}`}>
       {/* ヘッダーの内容を中央に配置し、横幅を制限します。 */}
-      <div className="mx-auto max-w-4xl flex items-center justify-between p-4">
-        {/* ロゴ画像へのリンクです。クリックするとトップページに戻ります。 */}
-        <Link
-          href="/"
-          className="flex items-center"
-        >
-          <Image
-            src="/images/favicon-32x32.png"
-            alt="Logo"
-            width={32}
-            height={32}
-            className="mr-2"
-          />
-        </Link>
+      <div className="mx-auto max-w-4xl flex items-center justify-center sm:justify-between px-2 sm:px-4 py-3 sm:py-4">
         {/* ナビゲーションメニュー全体です。 */}
-        <nav className="flex gap-8 items-center">
+        <nav className="flex gap-2 sm:gap-4 md:gap-6 lg:gap-8 items-center">
           {/* SNSアイコン（GitHub、X）を表示するエリアです。 */}
-          <div className="flex space-x-4 mr-6">
+          <div className="flex space-x-2 sm:space-x-3 md:space-x-4 mr-2 sm:mr-4 md:mr-6">
             {/* GitHubへのリンクアイコン */}
             <a
               href="https://github.com/atsuki61"
@@ -116,7 +101,7 @@ export default function Header() {
               aria-label="GitHub"
             >
               <FaGithub
-                className="w-5 h-5 transition-all duration-300"
+                className="w-4 h-4 sm:w-5 sm:h-5 transition-all duration-300"
                 style={iconStyle}
               />
             </a>
@@ -128,7 +113,7 @@ export default function Header() {
               aria-label="X"
             >
               <FaSquareXTwitter
-                className="w-5 h-5 transition-all duration-300"
+                className="w-4 h-4 sm:w-5 sm:h-5 transition-all duration-300"
                 style={iconStyle}
               />
             </a>
@@ -148,7 +133,7 @@ export default function Header() {
                     : '0 0 5px #0BF, 0 0 10px #0BF, 0 0 15px #8A2BE2, 0 0 20px #8A2BE2', // 非アクティブ時のシャドウ
               }}
               // 条件に応じてCSSクラスを動的に変更します。
-              className={`px-3 py-1 rounded-lg transition cursor-pointer 
+              className={`px-1 sm:px-2 md:px-3 py-1 rounded-lg transition cursor-pointer text-sm sm:text-base
                 ${active === id ? (scrolled ? 'text-cyan-300' : 'text-cyan-300') : scrolled ? 'text-white hover:text-cyan-300' : 'text-white hover:text-cyan-300'} 
                 ${active === id ? 'font-semibold' : ''}
               `}
