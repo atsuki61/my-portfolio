@@ -34,24 +34,24 @@ export default function HeroSection({ textures, idx, next }: HeroSectionProps) {
   return (
     <section
       id="home"
-      className="relative h-screen overflow-hidden transition-colors duration-1000 bg-[var(--home-bg-color)] cosmic-grid"
+      className="relative h-screen overflow-hidden transition-colors duration-1000 bg-[var(--home-bg-color)] cosmic-grid pt-16 md:pt-0"
       // stateで管理されるbgColorをインラインスタイルで適用し、背景色を動的に変更
       style={{ backgroundColor: bgColor }}
     >
       {/* スマホ: 縦積み (flex-col) / md以上: 横並び (flex-row) */}
       <div className="flex flex-col md:flex-row h-full">
         {/* 左 1/3：テキスト */}
-        <div className="w-full md:w-1/3 flex flex-col justify-center px-8 z-10">
-          <h1 className="text-5xl font-bold text-white mb-4 transition-all duration-500 font-['Space_Grotesk']">
+        <div className="w-full md:w-1/3 flex flex-col justify-center md:justify-center pt-8 sm:pt-12 md:pt-0 px-4 sm:px-6 md:px-8 z-10">
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 transition-all duration-500 font-['Space_Grotesk']">
             Hi! My name is Atsuki!
           </h1>
-          <p className="text-lg text-gray-300 mb-6 transition-all duration-500">
+          <p className="text-base md:text-lg text-gray-300 mb-6 transition-all duration-500">
             I am a third-year student at Kyoto Computer gain.
           </p>
         </div>
 
         {/* 右 2/3：3D Canvas */}
-        <div className="w-full h-[70vh] md:h-auto md:w-2/3 relative">
+        <div className="w-full h-[60vh] md:h-auto md:w-2/3 relative">
           <Canvas
             className="absolute inset-0"
             camera={{ position: [0, 0, 6], fov: 50 }}
