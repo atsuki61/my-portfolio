@@ -40,6 +40,15 @@ const PROJECTS: Project[] = [
     github: 'https://github.com/atsuki61/todo-app',
     live: 'https://todo-app-virid-pi-51.vercel.app/',
   },
+  {
+    id: 'proj3',
+    title: '100 Days of Code',
+    description: '100日間のコーディングの記録です。',
+    image: '/images/100DaysOfCode.png',
+    techs: ['HTML', 'CSS', 'JavaScript'],
+    github: 'https://github.com/atsuki61/100DaysOfCode',
+    live: 'https://100-days-of-code-delta.vercel.app/',
+  },
   // 他のプロジェクトもここに追加できます。
 ];
 

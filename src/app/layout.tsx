@@ -32,11 +32,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       {/* bodyタグ: Webページの主要なコンテンツが表示される部分です。 */}
       {/* スタイル: 背景色を白、文字色を黒にし、文字のアンチエイリアスを有効にしています。 */}
       <body className="bg-white text-black antialiased">
-        {/* すべてのページで共通のヘッダーを表示します。 */}
         <Header />
-        {/* 各ページ固有のコンテンツをここに表示します。 */}
         {children}
-        {/* すべてのページで共通のフッターを表示します。 */}
         <Footer />
       </body>
     </html>
