@@ -61,7 +61,7 @@ export default function ProjectsSection({ particleColor }: ProjectsSectionProps)
       style={{ backgroundColor: particleColor }} // 背景色を動的に変更
     >
       {/* セクション内のコンテンツを中央に配置し、横幅を制限します。 */}
-      <div className="max-w-5xl mx-auto px-4 space-y-8">
+      <div className="max-w-7xl mx-auto px-4 space-y-8">
         {/* セクションのタイトル「Projects」を表示します。 */}
         <h2 className="text-3xl font-bold text-center font-['Space_Grotesk']">Projects</h2>
 

@@ -15,7 +15,7 @@ src/
 │   │   ├── ContactSection.tsx
 │   │   ├── HeroSection.tsx
 │   │   └── ProjectsSection.tsx
-│   ├── ui/                      # 汎用UIコンポーネント (現在はButtonのみ)
+│   ├── ui/                      # 汎用UIコンポーネント
 │   │   └── Button.tsx
 │   ├── Footer.tsx               # フッターコンポーネント
 │   ├── Header.tsx               # ヘッダーコンポーネント
