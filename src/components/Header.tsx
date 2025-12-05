@@ -88,7 +88,7 @@ export default function Header() {
     // ヘッダー要素です。基本クラスと動的な背景クラスを組み合わせて適用します。
     <header className={`${headerBaseClasses} ${headerBgClass}`}>
       {/* ヘッダーの内容を中央に配置し、横幅を制限します。 */}
-      <div className="mx-auto max-w-4xl flex items-center justify-center sm:justify-between px-2 sm:px-4 py-3 sm:py-4">
+      <div className="mx-auto max-w-4xl flex items-center justify-end px-2 sm:px-4 py-3 sm:py-4">
         {/* ナビゲーションメニュー全体です。 */}
         <nav className="flex gap-2 sm:gap-4 md:gap-6 lg:gap-8 items-center">
           {/* SNSアイコン（GitHub、X）を表示するエリアです。 */}

@@ -45,7 +45,7 @@ const PROJECTS: Project[] = [
     title: '100 Days of Code',
     description: '100日間のコーディングの記録です。',
     image: '/images/100DaysOfCode.png',
-    techs: ['HTML', 'CSS', 'JavaScript'],
+    techs: ['Next.js', 'TypeScript', 'Tailwind CSS'],
     github: 'https://github.com/atsuki61/100DaysOfCode',
     live: 'https://100-days-of-code-delta.vercel.app/',
   },
