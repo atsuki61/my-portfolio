@@ -6,10 +6,6 @@ import { CometCard } from '../ui/comet-card';
 import { StarsBackground } from '../ui/stars-background';
 import { ShootingStars } from '../ui/shooting-stars';
 
-interface ProjectsSectionProps {
-  particleColor: string;
-}
-
 const PROJECTS = [
   {
     id: 'musclegrow',
@@ -49,7 +45,7 @@ const PROJECTS = [
   },
 ];
 
-export default function ProjectsSection({ particleColor }: ProjectsSectionProps) {
+export default function ProjectsSection() {
   return (
     <section
       id="projects"

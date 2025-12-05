@@ -10,11 +10,7 @@ import { BiLogoGmail } from 'react-icons/bi';
 import { StarsBackground } from '../ui/stars-background';
 import { ShootingStars } from '../ui/shooting-stars';
 
-interface ContactSectionProps {
-  particleColor: string;
-}
-
-export default function ContactSection({ particleColor }: ContactSectionProps) {
+export default function ContactSection() {
   const {
     register,
     handleSubmit,

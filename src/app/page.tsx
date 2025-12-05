@@ -71,9 +71,9 @@ export default function HomePage() {
         next={next}
       />
       {/* particleColor はもう使わないので削除、または渡しても無視されます */}
-      <AboutSection particleColor={currentTheme.bg} />
-      <ProjectsSection particleColor={currentTheme.bg} />
-      <ContactSection particleColor={currentTheme.bg} />
+      <AboutSection />
+      <ProjectsSection />
+      <ContactSection />
     </main>
   );
 }
