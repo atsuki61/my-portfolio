@@ -9,7 +9,7 @@ export const TextGenerateEffect = ({
   className,
   filter = true,
   duration = 0.5,
-  delay = 0, // 開始の遅延時間（秒）を追加
+  delay = 0,
 }: {
   words: string;
   className?: string;
@@ -18,10 +18,10 @@ export const TextGenerateEffect = ({
   delay?: number;
 }) => {
   const [scope, animate] = useAnimate();
-  let wordsArray = words.split(' ');
+  // let -> const に変更
+  const wordsArray = words.split(' ');
 
   useEffect(() => {
-    // delay秒待ってからアニメーション開始
     const timeout = setTimeout(() => {
       animate(
         'span',
@@ -31,13 +31,14 @@ export const TextGenerateEffect = ({
         },
         {
           duration: duration ? duration : 1,
-          delay: stagger(0.2), // 1単語ごとの間隔
+          delay: stagger(0.2),
         },
       );
     }, delay * 1000);
 
     return () => clearTimeout(timeout);
-  }, [scope.current, delay]); // delayが変わったら再実行
+    // 依存配列に必要な変数を追加
+  }, [scope, animate, delay, duration, filter]);
 
   const renderWords = () => {
     return (

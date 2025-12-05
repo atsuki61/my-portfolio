@@ -14,12 +14,11 @@ export default function HomePage() {
         name: '月',
         url: '/images/moon.jpg',
         rotationSpeed: 0.005,
-        // 色の設定（ここを変えると全ページの色が変わります）
         theme: {
-          bg: '#020617', // 深い青（Slate-950）
-          card: '#0f172a', // カード色（Slate-900）
-          accent: '#38bdf8', // 水色（Sky-400）
-          particle: '#38bdf8', // 星の光の色
+          bg: '#020617',
+          card: '#0f172a',
+          accent: '#38bdf8',
+          particle: '#38bdf8',
         },
       },
       {
@@ -27,9 +26,9 @@ export default function HomePage() {
         url: '/images/earth.jpg',
         rotationSpeed: 0.005,
         theme: {
-          bg: '#022c22', // 深い緑（Emerald-950）
-          card: '#064e3b', // カード色（Emerald-900）
-          accent: '#34d399', // 明るい緑（Emerald-400）
+          bg: '#022c22',
+          card: '#064e3b',
+          accent: '#34d399',
           particle: '#34d399',
         },
       },
@@ -38,9 +37,9 @@ export default function HomePage() {
         url: '/images/sun.jpg',
         rotationSpeed: 0.002,
         theme: {
-          bg: '#450a0a', // 深い赤（Red-950）
-          card: '#7f1d1d', // カード色（Red-900）
-          accent: '#fbbf24', // 黄色（Amber-400）
+          bg: '#450a0a',
+          card: '#7f1d1d',
+          accent: '#fbbf24',
           particle: '#fbbf24',
         },
       },
@@ -54,12 +53,11 @@ export default function HomePage() {
   const currentTheme = textures[idx].theme;
 
   return (
-    // ここでCSS変数をセットすることで、下層のコンポーネント全ての色を一括変更します
     <main
       className="transition-colors duration-1000"
+      // ▼ @ts-ignore のコメントを削除しました
       style={
         {
-          // @ts-ignore
           '--theme-bg': currentTheme.bg,
           '--theme-card': currentTheme.card,
           '--theme-accent': currentTheme.accent,
@@ -68,11 +66,11 @@ export default function HomePage() {
       }
     >
       <HeroSection
-        textures={textures} // 型エラーが出る場合はHeroSectionPropsを修正してください（後述）
+        textures={textures}
         idx={idx}
         next={next}
       />
-      {/* もうpropsで色を渡す必要はありません。CSS変数で自動で変わります */}
+      {/* particleColor はもう使わないので削除、または渡しても無視されます */}
       <AboutSection particleColor={currentTheme.bg} />
       <ProjectsSection particleColor={currentTheme.bg} />
       <ContactSection particleColor={currentTheme.bg} />

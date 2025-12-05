@@ -12,14 +12,16 @@ export const HoverEffect = ({
 }: {
   items: {
     title: string;
-    icon: IconType; // アイコンコンポーネントを受け取れるようにする
+    icon: IconType;
   }[];
   className?: string;
 }) => {
-  let [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  // let -> const に変更
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
     <div className={cn('grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 py-10', className)}>
+      {/* ...残りはそのまま... */}
       {items.map((item, idx) => (
         <div
           key={item?.title}
@@ -46,7 +48,6 @@ export const HoverEffect = ({
           </AnimatePresence>
           <Card>
             <div className="flex flex-col items-center justify-center gap-4 h-full min-h-[120px]">
-              {/* アイコン表示部分 */}
               <item.icon className="text-5xl text-gray-300 group-hover:text-white transition-colors duration-200" />
               <CardTitle>{item.title}</CardTitle>
             </div>
@@ -57,6 +58,7 @@ export const HoverEffect = ({
   );
 };
 
+// ... Card と CardTitle コンポーネントはそのまま ...
 export const Card = ({ className, children }: { className?: string; children: React.ReactNode }) => {
   return (
     <div

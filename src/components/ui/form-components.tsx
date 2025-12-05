@@ -18,17 +18,21 @@ export const Label = React.forwardRef<HTMLLabelElement, React.LabelHTMLAttribute
 );
 Label.displayName = 'Label';
 
-export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {}
+// interface{} を type に変更
+export type InputProps = React.InputHTMLAttributes<HTMLInputElement>;
 
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(({ className, type, ...props }, ref) => {
   const radius = 100;
   const [visible, setVisible] = React.useState(false);
 
-  let mouseX = useMotionValue(0);
-  let mouseY = useMotionValue(0);
+  // let -> const に変更
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
 
-  function handleMouseMove({ currentTarget, clientX, clientY }: any) {
-    let { left, top } = currentTarget.getBoundingClientRect();
+  // any -> React.MouseEvent に変更
+  function handleMouseMove({ currentTarget, clientX, clientY }: React.MouseEvent<HTMLDivElement>) {
+    // let -> const に変更
+    const { left, top } = currentTarget.getBoundingClientRect();
     mouseX.set(clientX - left);
     mouseY.set(clientY - top);
   }
@@ -39,7 +43,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(({ className
         background: useMotionTemplate`
         radial-gradient(
           ${visible ? radius + 'px' : '0px'} circle at ${mouseX}px ${mouseY}px,
-          var(--theme-accent), /* ▼ 修正: 青固定からテーマのアクセントカラーに変更 */
+          var(--theme-accent),
           transparent 80%
         )
       `,
@@ -68,17 +72,18 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(({ className
 });
 Input.displayName = 'Input';
 
-export interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {}
+// interface{} を type に変更
+export type TextareaProps = React.TextareaHTMLAttributes<HTMLTextAreaElement>;
 
 export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(({ className, ...props }, ref) => {
   const radius = 100;
   const [visible, setVisible] = React.useState(false);
 
-  let mouseX = useMotionValue(0);
-  let mouseY = useMotionValue(0);
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
 
-  function handleMouseMove({ currentTarget, clientX, clientY }: any) {
-    let { left, top } = currentTarget.getBoundingClientRect();
+  function handleMouseMove({ currentTarget, clientX, clientY }: React.MouseEvent<HTMLDivElement>) {
+    const { left, top } = currentTarget.getBoundingClientRect();
     mouseX.set(clientX - left);
     mouseY.set(clientY - top);
   }
@@ -89,7 +94,7 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(({ 
         background: useMotionTemplate`
         radial-gradient(
           ${visible ? radius + 'px' : '0px'} circle at ${mouseX}px ${mouseY}px,
-          var(--theme-accent), /* ▼ 修正: アクセントカラーに変更 */
+          var(--theme-accent),
           transparent 80%
         )
       `,

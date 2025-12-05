@@ -2,6 +2,8 @@
 'use client';
 
 import { BentoGrid, BentoGridItem } from '../ui/bento-grid';
+import { StarsBackground } from '../ui/stars-background';
+import { ShootingStars } from '../ui/shooting-stars';
 import {
   SiHtml5,
   SiCss3,
@@ -15,12 +17,9 @@ import {
 import { MdMovie } from 'react-icons/md';
 import { FaMusic, FaGamepad, FaLaptopCode, FaPlane, FaMobileAlt } from 'react-icons/fa';
 import { GiWeightLiftingUp, GiCupcake } from 'react-icons/gi';
-import { StarsBackground } from '../ui/stars-background';
-import { ShootingStars } from '../ui/shooting-stars';
 
-interface AboutSectionProps {
-  particleColor: string; // 使わなくなりますが型エラー防止のため残します
-}
+// 使わないのでProps定義は空にするか削除
+// interface AboutSectionProps {}
 
 const SKILLS = [
   { icon: <SiNextdotjs />, title: 'Next.js' },
@@ -44,11 +43,11 @@ const HOBBIES = [
   { icon: <FaMobileAlt />, title: 'Gadgets' },
 ];
 
-export default function AboutSection({ particleColor }: AboutSectionProps) {
+export default function AboutSection({}: { particleColor?: string }) {
   return (
     <section
       id="about"
-      className="relative py-20 text-white min-h-screen flex flex-col justify-center bg-[var(--theme-bg)] transition-colors duration-1000 ease-in-out overflow-hidden" // overflow-hiddenを追加
+      className="relative py-20 text-white min-h-screen flex flex-col justify-center bg-[var(--theme-bg)] transition-colors duration-1000 ease-in-out overflow-hidden"
     >
       <div className="absolute inset-0 z-0">
         <StarsBackground />
@@ -59,6 +58,7 @@ export default function AboutSection({ particleColor }: AboutSectionProps) {
           maxDelay={3000}
         />
       </div>
+
       <div className="relative z-10 w-full max-w-6xl mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold font-['Space_Grotesk'] mb-6">About Me</h2>
@@ -71,11 +71,11 @@ export default function AboutSection({ particleColor }: AboutSectionProps) {
 
         <div className="mb-20">
           <div className="flex items-end gap-4 mb-8 border-b border-gray-700 pb-2">
-            {/* ▼ 修正: text-theme-accent と transition クラスを追加 */}
             <h3 className="text-3xl font-bold font-['Space_Grotesk'] text-[var(--theme-accent)] transition-colors duration-1000">
               Skills
             </h3>
-            <span className="text-sm text-gray-500 pb-1 font-mono">// TECH STACK</span>
+            {/* コメント記法を修正 */}
+            <span className="text-sm text-gray-500 pb-1 font-mono">{/* // TECH STACK */}TECH STACK</span>
           </div>
           <BentoGrid>
             {SKILLS.map((item, i) => (
@@ -91,11 +91,11 @@ export default function AboutSection({ particleColor }: AboutSectionProps) {
 
         <div>
           <div className="flex items-end gap-4 mb-8 border-b border-gray-700 pb-2">
-            {/* ▼ 修正: text-theme-accent と transition クラスを追加 */}
             <h3 className="text-3xl font-bold font-['Space_Grotesk'] text-[var(--theme-accent)] transition-colors duration-1000 opacity-80">
               Hobbies
             </h3>
-            <span className="text-sm text-gray-500 pb-1 font-mono">// PRIVATE LIFE</span>
+            {/* コメント記法を修正 */}
+            <span className="text-sm text-gray-500 pb-1 font-mono">{/* // PRIVATE LIFE */}PRIVATE LIFE</span>
           </div>
           <BentoGrid>
             {HOBBIES.map((item, i) => (

@@ -1,7 +1,8 @@
 'use client';
 import { cn } from '@/utils/cn';
-import React, { useState, useEffect, useRef, RefObject, useCallback } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 
+// ... StarPropsなどのインターフェース定義はそのまま ...
 interface StarProps {
   x: number;
   y: number;
@@ -65,13 +66,15 @@ export const StarsBackground: React.FC<StarBackgroundProps> = ({
     updateStars();
 
     const resizeObserver = new ResizeObserver(updateStars);
-    if (canvasRef.current) {
-      resizeObserver.observe(canvasRef.current);
+    // refをコピーしてから使う（警告回避）
+    const currentCanvas = canvasRef.current;
+    if (currentCanvas) {
+      resizeObserver.observe(currentCanvas);
     }
 
     return () => {
-      if (canvasRef.current) {
-        resizeObserver.unobserve(canvasRef.current);
+      if (currentCanvas) {
+        resizeObserver.unobserve(currentCanvas);
       }
     };
   }, [starDensity, allStarsTwinkle, twinkleProbability, minTwinkleSpeed, maxTwinkleSpeed, generateStars]);
