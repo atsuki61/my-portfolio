@@ -5,7 +5,6 @@ import { FormValues, formValidation } from '@/utils/validation';
 import { sendEmail } from '@/utils/sendEmail';
 import { Label, Input, Textarea } from '../ui/form-components';
 import { FaGithub, FaSquareXTwitter } from 'react-icons/fa6';
-import { BiLogoGmail } from 'react-icons/bi';
 
 export default function ContactSection() {
   const {
@@ -37,11 +36,7 @@ export default function ContactSection() {
         <div className="space-y-8 text-center lg:text-left">
           <div>
             <h2 className="text-5xl md:text-6xl font-bold font-['Space_Grotesk'] mb-6">Get in Touch</h2>
-            <p className="text-lg text-gray-300 max-w-md mx-auto lg:mx-0 leading-relaxed">
-              制作の依頼やご質問、雑談など、お気軽にご連絡ください。
-              <br />
-              SNSのDMでも受け付けています！
-            </p>
+            {/* 説明文を削除しました */}
           </div>
 
           <div className="flex justify-center lg:justify-start gap-6">
@@ -61,9 +56,7 @@ export default function ContactSection() {
             >
               <FaSquareXTwitter className="text-3xl text-gray-300 group-hover:text-(--theme-accent) transition-colors duration-300" />
             </a>
-            <div className="p-4 bg-white/5 border border-white/10 rounded-2xl group cursor-default">
-              <BiLogoGmail className="text-3xl text-gray-300 group-hover:text-red-400 transition-colors" />
-            </div>
+            {/* Gmailアイコンを削除しました */}
           </div>
         </div>
 

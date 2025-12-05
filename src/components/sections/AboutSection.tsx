@@ -1,4 +1,3 @@
-// src/components/sections/AboutSection.tsx
 'use client';
 
 import { BentoGrid, BentoGridItem } from '../ui/bento-grid';
@@ -44,7 +43,6 @@ export default function AboutSection() {
   return (
     <section
       id="about"
-      // ▼ bg-(--theme-bg) に修正
       className="relative py-20 text-white min-h-screen flex flex-col justify-center bg-(--theme-bg) transition-colors duration-1000 ease-in-out overflow-hidden"
     >
       <div className="absolute inset-0 z-0">
@@ -69,7 +67,6 @@ export default function AboutSection() {
 
         <div className="mb-20">
           <div className="flex items-end gap-4 mb-8 border-b border-gray-700 pb-2">
-            {/* ▼ text-(--theme-accent) に修正 */}
             <h3 className="text-3xl font-bold font-['Space_Grotesk'] text-(--theme-accent) transition-colors duration-1000">
               Skills
             </h3>
@@ -89,7 +86,6 @@ export default function AboutSection() {
 
         <div>
           <div className="flex items-end gap-4 mb-8 border-b border-gray-700 pb-2">
-            {/* ▼ text-(--theme-accent) に修正 */}
             <h3 className="text-3xl font-bold font-['Space_Grotesk'] text-(--theme-accent) transition-colors duration-1000 opacity-80">
               Hobbies
             </h3>
@@ -107,19 +103,7 @@ export default function AboutSection() {
           </BentoGrid>
         </div>
 
-        <div className="text-center mt-20">
-          <p className="text-gray-400 text-sm">
-            Interested in working together? Check out my
-            {/* ▼ hover:text-(--theme-accent) に修正 */}
-            <a
-              href="#projects"
-              className="ml-1 text-white underline hover:text-(--theme-accent) transition-colors"
-            >
-              Projects
-            </a>
-            .
-          </p>
-        </div>
+        {/* フッターテキストを削除しました */}
       </div>
     </section>
   );
