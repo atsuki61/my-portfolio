@@ -34,7 +34,7 @@ export default function HomePage() {
         particleColor: '#6a1b0a',
       },
     ],
-    [], // 依存配列が空なので、このデータはコンポーネントが最初に読み込まれた時に一度だけ生成されます。
+    [],
   );
 
   // useState: 現在選択されているテクスチャのインデックス（配列textures内の位置）を管理します。
