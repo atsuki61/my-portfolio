@@ -1,121 +1,134 @@
+// src/components/sections/ContactSection.tsx
 'use client';
 
 import { useForm } from 'react-hook-form';
 import { FormValues, formValidation } from '@/utils/validation';
 import { sendEmail } from '@/utils/sendEmail';
+import { Label, Input, Textarea } from '../ui/form-components'; // さっき作ったコンポーネント
+import { FaGithub, FaSquareXTwitter } from 'react-icons/fa6';
+import { BiLogoGmail } from 'react-icons/bi';
 
-// このコンポーネントが受け取る情報（props）の形を定義しています。
-// particleColor: パーティクルの色を文字列で指定します。
 interface ContactSectionProps {
   particleColor: string;
 }
 
-// 「Contact」セクションを表示するための主要なコンポーネントです。
 export default function ContactSection({ particleColor }: ContactSectionProps) {
-  // react-hook-form を使ってフォームの値を管理したり、入力チェック（バリデーション）を簡単に行うための準備をします。
   const {
-    register, // input や textarea 要素を react-hook-form に登録する関数
-    handleSubmit, // フォーム送信時に実行される関数をラップする関数
-    reset, // フォームの内容をリセットする関数
-    formState: { errors, isSubmitting }, // フォームの状態（エラー情報や送信中かどうか）
-  } = useForm<FormValues>(); // FormValues はフォームの入力項目とその型を定義したもの
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isSubmitting },
+  } = useForm<FormValues>();
 
-  // フォームが送信されたときに実行される処理です。
-  // data にはフォームに入力された値が入っています。
   const onSubmit = async (data: FormValues) => {
-    // sendEmail関数を使って、入力されたデータをメールで送信します。
     const result = await sendEmail(data);
     if (result.success) {
-      // 送信成功時
-      alert(result.message); // 成功メッセージを表示
-      reset(); // フォームの内容を空にする
+      alert(result.message);
+      reset();
     } else {
-      // 送信失敗時
-      alert(result.message); // 失敗メッセージを表示
+      alert(result.message);
     }
   };
 
   return (
-    // セクション全体を囲む部分です。背景色や余白、最小の高さを設定しています。
     <section
-      id="contact" // ページ内リンクのためのID
-      className="py-20 text-white transition-colors duration-1000 min-h-screen" // スタイルを指定
-      style={{ backgroundColor: particleColor }} // 背景色を動的に変更
+      id="contact"
+      className="py-20 text-white min-h-screen flex items-center justify-center relative overflow-hidden bg-[var(--theme-bg)] transition-colors duration-1000 ease-in-out"
     >
-      {/* セクション内のコンテンツを中央に配置し、横幅を制限します。 */}
-      <div className="max-w-lg mx-auto px-4">
-        {/* セクションのタイトル「Contact」を表示します。 */}
-        <h2 className="text-3xl font-bold text-center font-['Space_Grotesk']">Contact</h2>
+      {/* 背景の装飾（薄い光の玉を浮かべてリッチにする） */}
+      <div className="absolute top-[-20%] left-[-10%] w-[500px] h-[500px] bg-purple-500/20 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute bottom-[-20%] right-[-10%] w-[500px] h-[500px] bg-cyan-500/20 rounded-full blur-[100px] pointer-events-none" />
 
-        {/* お問い合わせフォーム本体です。送信時に onSubmit 関数が呼ばれます。 */}
-        <form
-          onSubmit={handleSubmit(onSubmit)} // フォーム送信時の処理を指定
-          className="mt-6 space-y-4" // フォームのスタイル
-        >
-          {/* 「Name」入力フィールドの部分です。 */}
+      <div className="max-w-6xl w-full mx-auto px-4 z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        {/* 左側：メッセージとSNS */}
+        <div className="space-y-8 text-center lg:text-left">
           <div>
-            <label
-              htmlFor="name" // input要素とラベルを関連付ける
-              className="block text-sm font-medium text-gray-300" // ラベルのスタイル
-            >
-              Name
-            </label>
-            <input
-              id="name" // label の htmlFor と対応
-              type="text" // 入力の種類はテキスト
-              {...register('name', formValidation.name)} // react-hook-form に 'name' として登録し、入力ルールも指定
-              className="mt-1 block w-full border border-gray-600 rounded p-2 bg-gray-700 text-white placeholder-gray-400 focus:border-blue-500 focus:ring-blue-500" // 入力フィールドのスタイル
-            />
-            {/* 'name' フィールドに入力エラーがある場合にメッセージを表示します。 */}
-            {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>}
+            <h2 className="text-5xl md:text-6xl font-bold font-['Space_Grotesk'] mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400">
+              Get in Touch
+            </h2>
+            <p className="text-lg text-gray-300 max-w-md mx-auto lg:mx-0 leading-relaxed">
+              制作の依頼やご質問、雑談など、お気軽にご連絡ください。
+              <br />
+              SNSのDMでも受け付けています！
+            </p>
           </div>
 
-          {/* 「Email」入力フィールドの部分です。 */}
-          <div>
-            <label
-              htmlFor="email"
-              className="block text-sm font-medium text-gray-300"
+          <div className="flex justify-center lg:justify-start gap-6">
+            {/* SNSリンク */}
+            <a
+              href="https://github.com/atsuki61"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-4 bg-white/5 border border-white/10 rounded-2xl hover:bg-white/20 transition-all hover:scale-110 group"
             >
-              Email
-            </label>
-            <input
-              id="email"
-              type="email"
-              {...register('email', formValidation.email)}
-              className="mt-1 block w-full border border-gray-600 rounded p-2 bg-gray-700 text-white placeholder-gray-400 focus:border-blue-500 focus:ring-blue-500"
-            />
-            {/* 'email' フィールドに入力エラーがある場合にメッセージを表示します。 */}
-            {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>}
-          </div>
-
-          {/* 「Message」入力フィールド（複数行テキストエリア）の部分です。 */}
-          <div>
-            <label
-              htmlFor="message"
-              className="block text-sm font-medium text-gray-300"
+              <FaGithub className="text-3xl text-gray-300 group-hover:text-white" />
+            </a>
+            <a
+              href="https://x.com/atsuki_prog_ai"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-4 bg-white/5 border border-white/10 rounded-2xl hover:bg-white/20 transition-all hover:scale-110 group"
             >
-              Message
-            </label>
-            <textarea
-              id="message"
-              rows={4} // 表示する行数
-              {...register('message', formValidation.message)}
-              className="mt-1 block w-full border border-gray-600 rounded p-2 bg-gray-700 text-white placeholder-gray-400 focus:border-blue-500 focus:ring-blue-500"
-            />
-            {/* 'message' フィールドに入力エラーがある場合にメッセージを表示します。 */}
-            {errors.message && <p className="text-red-500 text-sm mt-1">{errors.message.message}</p>}
+              <FaSquareXTwitter className="text-3xl text-gray-300 group-hover:text-white" />
+            </a>
+            <div className="p-4 bg-white/5 border border-white/10 rounded-2xl group cursor-default">
+              <BiLogoGmail className="text-3xl text-gray-300 group-hover:text-red-400 transition-colors" />
+            </div>
           </div>
+        </div>
 
-          {/* 送信ボタンです。 */}
-          <button
-            type="submit" // ボタンの種類を送信ボタンに指定
-            disabled={isSubmitting} // 送信中はボタンを押せないようにする
-            className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition disabled:bg-gray-500" // ボタンのスタイル
+        {/* 右側：ガラスデザインのフォーム */}
+        <div className="bg-black/30 backdrop-blur-xl border border-white/10 p-8 md:p-10 rounded-3xl shadow-2xl relative">
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="space-y-6"
           >
-            {/* 送信中かどうかでボタンのテキストを切り替えます。 */}
-            {isSubmitting ? '送信中…' : '送信'}
-          </button>
-        </form>
+            <div className="space-y-2">
+              <Label htmlFor="name">Name</Label>
+              <Input
+                id="name"
+                placeholder="Your Name"
+                type="text"
+                {...register('name', formValidation.name)}
+              />
+              {errors.name && <p className="text-red-400 text-xs mt-1">{errors.name.message}</p>}
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="email">Email</Label>
+              <Input
+                id="email"
+                placeholder="example@gmail.com"
+                type="email"
+                {...register('email', formValidation.email)}
+              />
+              {errors.email && <p className="text-red-400 text-xs mt-1">{errors.email.message}</p>}
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="message">Message</Label>
+              <Textarea
+                id="message"
+                placeholder="ここにメッセージを入力してください..."
+                rows={5}
+                {...register('message', formValidation.message)}
+              />
+              {errors.message && <p className="text-red-400 text-xs mt-1">{errors.message.message}</p>}
+            </div>
+
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              // ▼ bg-gradient-to-r from-blue-600 to-cyan-600 を変更
+              // テーマカラー（theme-accent）を背景色にし、ホバーで少し明るくする設定
+              className="w-full bg-theme-accent text-theme-bg font-bold py-3 rounded-xl 
+             hover:brightness-110 transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98]
+             disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
+            >
+              {isSubmitting ? 'Sending...' : 'Send Message'}
+            </button>
+          </form>
+        </div>
       </div>
     </section>
   );

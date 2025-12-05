@@ -3,51 +3,52 @@
 
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, Stars } from '@react-three/drei';
-import React, { useState, useEffect } from 'react';
+import React from 'react'; // useState, useEffect は不要なので削除
 import TextureSphere from '../TextureSphere';
+import { TextGenerateEffect } from '../ui/text-generate-effect';
 
-// Props の型定義
 interface HeroSectionProps {
   textures: Array<{
     name: string;
     url: string;
-    color: string;
     rotationSpeed: number;
-    particleColor: string;
+    theme: {
+      bg: string;
+      card: string;
+      accent: string;
+      particle: string;
+    };
   }>;
   idx: number;
   next: () => void;
-  // particleColor?: string; // HeroSection は自身の背景色を textures[idx].color から取得するため、particleColor prop は任意または不要
 }
 
 export default function HeroSection({ textures, idx, next }: HeroSectionProps) {
-  // const textures = useMemo(...);
-
-  // 現在の背景色とテーマ（トランジション用）
-  const [bgColor, setBgColor] = useState(textures[idx].color); // 初期値は props の idx と textures を使用
-  // 惑星が変わったときに背景色をアニメーションで変更
-  useEffect(() => {
-    // 新しい背景色をセット
-    setBgColor(textures[idx].color);
-  }, [idx, textures]);
+  // これにより、親からデータが渡された瞬間に色が切り替わるようになります。
 
   return (
     <section
       id="home"
+      // transitionの設定は他のセクションと合わせて duration-1000 にしています
       className="relative h-screen overflow-hidden transition-colors duration-1000 bg-[var(--home-bg-color)] cosmic-grid pt-16 md:pt-0"
-      // stateで管理されるbgColorをインラインスタイルで適用し、背景色を動的に変更
-      style={{ backgroundColor: bgColor }}
+      // State経由ではなく、直接 theme.bg を適用
+      style={{ backgroundColor: textures[idx].theme.bg }}
     >
-      {/* スマホ: 縦積み (flex-col) / md以上: 横並び (flex-row) */}
       <div className="flex flex-col md:flex-row h-full">
-        {/* 左 1/3：テキスト */}
+        {/* 左 1/3：テキストエリア */}
         <div className="w-full md:w-1/3 flex flex-col justify-center md:justify-center pt-8 sm:pt-12 md:pt-0 px-4 sm:px-6 md:px-8 z-10">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 transition-all duration-500 font-['Space_Grotesk']">
-            Hi! My name is Atsuki!
-          </h1>
-          <p className="text-base md:text-lg text-gray-300 mb-6 transition-all duration-500">
-            I am a third-year student at Kyoto Computer gain.
-          </p>
+          <TextGenerateEffect
+            words="Hi! My name is Atsuki!"
+            className="text-4xl md:text-5xl font-bold text-white mb-4 font-['Space_Grotesk']"
+            delay={0}
+          />
+
+          <TextGenerateEffect
+            words="I am a third-year student at Kyoto Computer Gakuin."
+            className="text-base md:text-lg text-gray-300 font-normal"
+            delay={1.5}
+            duration={0.7}
+          />
         </div>
 
         {/* 右 2/3：3D Canvas */}
@@ -56,7 +57,6 @@ export default function HeroSection({ textures, idx, next }: HeroSectionProps) {
             className="absolute inset-0"
             camera={{ position: [0, 0, 6], fov: 50 }}
           >
-            {/* 背景の星空 */}
             <Stars
               radius={100}
               depth={50}
@@ -66,27 +66,21 @@ export default function HeroSection({ textures, idx, next }: HeroSectionProps) {
               fade
               speed={1}
             />
-
-            {/* ライティング - 天体に合わせて色を変える */}
             <ambientLight intensity={3.5} />
             <pointLight
               position={[5, 5, 5]}
               intensity={1.0}
-              color={textures[idx].particleColor} // props の particleColor を使用
+              color={textures[idx].theme.particle}
             />
             <pointLight
               position={[-5, -5, -5]}
               intensity={0.2}
             />
-
-            {/* 球体メッシュ（テクスチャ切り替え可能） */}
             <TextureSphere
               textureURL={textures[idx].url}
-              onClick={next} // props の next を使用
+              onClick={next}
               rotationSpeed={textures[idx].rotationSpeed}
             />
-
-            {/* マウスドラッグで視点操作 */}
             <OrbitControls enableZoom={false} />
           </Canvas>
         </div>

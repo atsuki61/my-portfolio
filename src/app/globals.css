@@ -1,33 +1,50 @@
+/* src/app/globals.css */
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap');
 @import 'tailwindcss';
 
+@theme {
+  /* ここで定義した変数が Tailwind のクラスとして使えます */
+  /* 例: bg-theme-bg, text-theme-accent */
+  --color-theme-bg: var(--theme-bg);
+  --color-theme-card: var(--theme-card);
+  --color-theme-accent: var(--theme-accent);
+  --color-theme-text: var(--theme-text);
+}
+
 :root {
-  /* --- 背景デザイン --- */
-  /* 宇宙グリッド風の背景スタイル */
+  /* デフォルトの色（月） */
+  --theme-bg: #020617; /* 全体の背景色 */
+  --theme-card: #0f172a; /* カードの背景色 */
+  --theme-accent: #38bdf8; /* 強調色（ボタンやアイコン） */
+  --theme-text: #e2e8f0; /* 基本の文字色 */
+
+  /* 宇宙グリッドの設定 */
   .cosmic-grid {
     background-image:
       repeating-linear-gradient(
         0deg,
         transparent,
         transparent 31px,
-        rgba(255, 255, 255, 0.05) 31px,
-        rgba(255, 255, 255, 0.05) 32px
+        rgba(255, 255, 255, 0.03) 31px,
+        rgba(255, 255, 255, 0.03) 32px
       ),
       repeating-linear-gradient(
         90deg,
-        /* 垂直線 */ transparent,
+        transparent,
         transparent 31px,
-        rgba(255, 255, 255, 0.05) 31px,
-        rgba(255, 255, 255, 0.05) 32px
+        rgba(255, 255, 255, 0.03) 31px,
+        rgba(255, 255, 255, 0.03) 32px
       );
-    background-size: 32px 32px; /* グリッドの1マスのサイズ */
+    background-size: 32px 32px;
   }
 
-  /* --- 基本的なbodyスタイル --- */
   body {
-    background: var(--background); /* 明るい背景をデフォルトに */
-    color: var(--foreground); /* 標準テキスト色 */
-    font-family: 'Space Grotesk', 'Noto Sans JP', Arial, Helvetica, sans-serif; /* フォント設定 */
+    background: var(--theme-bg);
+    color: var(--theme-text);
+    font-family: 'Space Grotesk', 'Noto Sans JP', sans-serif;
+    transition:
+      background-color 1s ease,
+      color 1s ease; /* 色がふわっと変わるように */
   }
 }

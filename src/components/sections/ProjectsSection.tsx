@@ -62,8 +62,7 @@ export default function ProjectsSection({ particleColor }: ProjectsSectionProps)
   return (
     <section
       id="projects"
-      className="py-20 text-white transition-colors duration-1000 min-h-screen"
-      style={{ backgroundColor: particleColor }}
+      className="py-20 text-white min-h-screen bg-[var(--theme-bg)] transition-colors duration-1000 ease-in-out"
     >
       <div className="max-w-7xl mx-auto px-4 space-y-12">
         <h2 className="text-4xl font-bold text-center font-['Space_Grotesk'] mb-8">Projects</h2>

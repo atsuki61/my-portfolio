@@ -1,7 +1,7 @@
 // src/components/sections/AboutSection.tsx
 'use client';
 
-import Marquee from 'react-fast-marquee';
+import { BentoGrid, BentoGridItem } from '../ui/bento-grid';
 import {
   SiHtml5,
   SiCss3,
@@ -15,104 +15,102 @@ import {
 import { MdMovie } from 'react-icons/md';
 import { FaMusic, FaGamepad, FaLaptopCode, FaPlane, FaMobileAlt } from 'react-icons/fa';
 import { GiWeightLiftingUp, GiCupcake } from 'react-icons/gi';
-import type { ComponentType } from 'react';
 
-// Props の型定義
 interface AboutSectionProps {
-  particleColor: string;
+  particleColor: string; // 使わなくなりますが型エラー防止のため残します
 }
 
 const SKILLS = [
-  { icon: SiHtml5, label: 'HTML' },
-  { icon: SiCss3, label: 'CSS' },
-  { icon: SiTailwindcss, label: 'Tailwind CSS' },
-  { icon: SiJavascript, label: 'JavaScript' },
-  { icon: SiTypescript, label: 'TypeScript' },
-  { icon: SiNextdotjs, label: 'Next.js' },
-  { icon: SiReact, label: 'React' },
-  { icon: SiPython, label: 'Python' },
+  { icon: <SiNextdotjs />, title: 'Next.js' },
+  { icon: <SiReact />, title: 'React' },
+  { icon: <SiTypescript />, title: 'TypeScript' },
+  { icon: <SiTailwindcss />, title: 'Tailwind' },
+  { icon: <SiJavascript />, title: 'JavaScript' },
+  { icon: <SiHtml5 />, title: 'HTML5' },
+  { icon: <SiCss3 />, title: 'CSS3' },
+  { icon: <SiPython />, title: 'Python' },
 ];
+
 const HOBBIES = [
-  { icon: MdMovie, label: 'アニメ' },
-  { icon: FaMusic, label: '音楽を聴く' },
-  { icon: FaGamepad, label: 'ゲーム' },
-  { icon: GiWeightLiftingUp, label: '筋トレ' },
-  { icon: FaLaptopCode, label: '開発' },
-  { icon: GiCupcake, label: '甘い物' },
-  { icon: FaPlane, label: '旅行' },
-  { icon: FaMobileAlt, label: 'ガジェット' },
+  { icon: <FaLaptopCode />, title: 'Coding' },
+  { icon: <GiWeightLiftingUp />, title: 'Workout' },
+  { icon: <MdMovie />, title: 'Anime' },
+  { icon: <FaGamepad />, title: 'Gaming' },
+  { icon: <FaMusic />, title: 'Music' },
+  { icon: <GiCupcake />, title: 'Sweets' },
+  { icon: <FaPlane />, title: 'Travel' },
+  { icon: <FaMobileAlt />, title: 'Gadgets' },
 ];
-
-const MARQUEE_PROPS = {
-  className: 'h-[10rem] overflow-visible',
-  gradient: false,
-  pauseOnHover: false,
-};
-
-// アイテム配列の型定義
-// ItemTypeはアイコンとラベルを保持する
-type ItemType = { icon: ComponentType<{ className?: string }>; label: string };
-
-// マーキー表示用の汎用コンポーネント
-function IconMarqueeSection({ title, items, speed }: { title?: string; items: ItemType[]; speed: number }) {
-  return (
-    <div>
-      <h3 className="text-2xl font-semibold mb-4 text-center font-['Space_Grotesk']">{title}</h3>
-      <div className="pt-2 pb-6 overflow-visible">
-        <Marquee
-          {...MARQUEE_PROPS}
-          speed={speed}
-        >
-          {items.map(({ icon: Icon, label }) => (
-            <div
-              key={label}
-              className="flex flex-col items-center flex-shrink-0 mx-12 transform transition-transform duration-300 hover:scale-110"
-            >
-              <Icon className="w-24 h-24 mb-3" />
-              <span className="text-base">{label}</span>
-            </div>
-          ))}
-        </Marquee>
-      </div>
-    </div>
-  );
-}
 
 export default function AboutSection({ particleColor }: AboutSectionProps) {
   return (
     <section
       id="about"
-      // CSS変数による背景色と斜めストライプスタイルを適用
-      // `relative` は疑似要素 `::before` の絶対配置の基準となる
-      className="relative py-20 text-white diagonal-stripes transition-colors duration-1000"
-      style={{ backgroundColor: particleColor }}
+      // ▼ 修正: styleを削除し、bg-[var(--theme-bg)] と transition クラスを追加
+      className="relative py-20 text-white min-h-screen flex flex-col justify-center bg-[var(--theme-bg)] transition-colors duration-1000 ease-in-out"
     >
-      {/* 
-        コンテンツ全体をラップするdiv要素。
-        `relative` と `z-10` を指定することで、
-        `diagonal-stripes` の疑似要素 (z-index: 0) よりも手前に表示されるようにする。
-      */}
-      <div className="relative z-10 max-w-5xl mx-auto px-4 space-y-12">
-        <h2 className="text-4xl font-bold text-center font-['Space_Grotesk']">About Me</h2>
-        <p className="text-center text-lg">
-          滋賀県出身の学生で、現在京都コンピュータ学院京都駅前校で Webアプリケーション開発を学んでいます。
-        </p>
+      <div className="relative z-10 w-full max-w-6xl mx-auto px-4">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold font-['Space_Grotesk'] mb-6">About Me</h2>
+          <p className="text-lg text-gray-300 max-w-2xl mx-auto leading-relaxed">
+            滋賀県出身の学生エンジニア。
+            <br />
+            モダンなWeb技術を中心に、日々の学習と開発を楽しんでいます。
+          </p>
+        </div>
 
-        {/* 技術スタック */}
-        <IconMarqueeSection
-          title="Studying Skills＆Hobbies"
-          items={SKILLS}
-          speed={50}
-        />
-        {/* 趣味・好きなこと */}
-        <IconMarqueeSection
-          items={HOBBIES}
-          speed={40}
-        />
+        <div className="mb-20">
+          <div className="flex items-end gap-4 mb-8 border-b border-gray-700 pb-2">
+            {/* ▼ 修正: text-theme-accent と transition クラスを追加 */}
+            <h3 className="text-3xl font-bold font-['Space_Grotesk'] text-[var(--theme-accent)] transition-colors duration-1000">
+              Skills
+            </h3>
+            <span className="text-sm text-gray-500 pb-1 font-mono">// TECH STACK</span>
+          </div>
+          <BentoGrid>
+            {SKILLS.map((item, i) => (
+              <BentoGridItem
+                key={i}
+                title={item.title}
+                icon={item.icon}
+                className={i === 0 || i === 3 ? 'md:col-span-2' : ''}
+              />
+            ))}
+          </BentoGrid>
+        </div>
 
-        <p className="text-center text-lg text-gray-300">
-          将来的にはUI/UXも自分でデザインできるエンジニアを目指しています！
-        </p>
+        <div>
+          <div className="flex items-end gap-4 mb-8 border-b border-gray-700 pb-2">
+            {/* ▼ 修正: text-theme-accent と transition クラスを追加 */}
+            <h3 className="text-3xl font-bold font-['Space_Grotesk'] text-[var(--theme-accent)] transition-colors duration-1000 opacity-80">
+              Hobbies
+            </h3>
+            <span className="text-sm text-gray-500 pb-1 font-mono">// PRIVATE LIFE</span>
+          </div>
+          <BentoGrid>
+            {HOBBIES.map((item, i) => (
+              <BentoGridItem
+                key={i}
+                title={item.title}
+                icon={item.icon}
+                className="bg-slate-800/50 hover:bg-slate-800"
+              />
+            ))}
+          </BentoGrid>
+        </div>
+
+        <div className="text-center mt-20">
+          <p className="text-gray-400 text-sm">
+            Interested in working together? Check out my{' '}
+            <a
+              href="#projects"
+              className="text-white underline hover:text-[var(--theme-accent)] transition-colors"
+            >
+              Projects
+            </a>
+            .
+          </p>
+        </div>
       </div>
     </section>
   );
