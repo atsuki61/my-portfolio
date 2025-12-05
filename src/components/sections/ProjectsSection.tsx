@@ -1,25 +1,16 @@
 // src/components/sections/ProjectsSection.tsx
+'use client';
 import Image from 'next/image';
 import { FaGithub, FaExternalLinkAlt, FaMobileAlt } from 'react-icons/fa';
-// ▼ CometCardをインポート
 import { CometCard } from '../ui/comet-card';
+import { StarsBackground } from '../ui/stars-background';
+import { ShootingStars } from '../ui/shooting-stars';
 
 interface ProjectsSectionProps {
   particleColor: string;
 }
 
-type Project = {
-  id: string;
-  title: string;
-  description: string;
-  image: string;
-  techs: string[];
-  github?: string;
-  live?: string;
-};
-
-// 実績データ
-const PROJECTS: Project[] = [
+const PROJECTS = [
   {
     id: 'musclegrow',
     title: 'MuscleGrow',
@@ -62,28 +53,36 @@ export default function ProjectsSection({ particleColor }: ProjectsSectionProps)
   return (
     <section
       id="projects"
-      className="py-20 text-white min-h-screen bg-[var(--theme-bg)] transition-colors duration-1000 ease-in-out"
+      className="relative py-20 text-white min-h-screen bg-[var(--theme-bg)] transition-colors duration-1000 ease-in-out overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto px-4 space-y-12">
+      {/* ▼ 背景エフェクトを追加 */}
+      <div className="absolute inset-0 z-0">
+        <StarsBackground />
+        <ShootingStars
+          starColor="var(--theme-accent)"
+          trailColor="var(--theme-accent)"
+          minDelay={1500}
+          maxDelay={4000}
+        />
+      </div>
+      <div className="relative z-10 max-w-7xl mx-auto px-4 space-y-12">
         <h2 className="text-4xl font-bold text-center font-['Space_Grotesk'] mb-8">Projects</h2>
 
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {PROJECTS.map((proj) => (
-            // ▼ CometCardの実装
             <CometCard
               key={proj.id}
               className="w-full h-full"
             >
-              <div className="relative flex w-full h-full cursor-pointer flex-col items-stretch rounded-2xl border-0 bg-[#1F2121] p-4 saturate-0 transition-all duration-300 hover:saturate-100 group">
+              <div className="relative flex w-full h-full cursor-pointer flex-col items-stretch rounded-2xl border-0 bg-[var(--theme-card)] transition-colors duration-1000 p-4 saturate-0 hover:saturate-100 group">
                 {/* 画像エリア */}
-                <div className="relative w-full aspect-video overflow-hidden rounded-xl bg-black">
+                <div className="relative w-full aspect-video overflow-hidden rounded-xl bg-black/50">
                   <Image
                     src={proj.image}
                     alt={proj.title}
                     fill
                     className="object-cover transition-transform duration-500 group-hover:scale-105 opacity-80 group-hover:opacity-100"
                   />
-                  {/* PWAバッジ（画像の上に重ねる） */}
                   {proj.techs.includes('PWA') && (
                     <div className="absolute top-2 right-2 bg-purple-600 text-white text-[10px] font-bold px-2 py-1 rounded-full shadow-lg flex items-center gap-1 z-10">
                       <FaMobileAlt /> PWA
@@ -100,9 +99,8 @@ export default function ProjectsSection({ particleColor }: ProjectsSectionProps)
 
                   <p className="text-xs text-gray-400 line-clamp-2 mb-4 flex-1">{proj.description}</p>
 
-                  {/* 技術スタックとリンク */}
-                  <div className="flex items-center justify-between mt-auto pt-2 border-t border-gray-800">
-                    <div className="flex gap-2 text-xs text-gray-500">
+                  <div className="flex items-center justify-between mt-auto pt-2 border-t border-white/10">
+                    <div className="flex gap-2 text-xs text-gray-400">
                       {proj.techs.slice(0, 2).map((t) => (
                         <span key={t}>{t}</span>
                       ))}
@@ -115,7 +113,7 @@ export default function ProjectsSection({ particleColor }: ProjectsSectionProps)
                           href={proj.github}
                           target="_blank"
                           rel="noreferrer"
-                          className="hover:text-white transition"
+                          className="hover:text-[var(--theme-accent)] transition-colors"
                         >
                           <FaGithub size={16} />
                         </a>
@@ -125,7 +123,7 @@ export default function ProjectsSection({ particleColor }: ProjectsSectionProps)
                           href={proj.live}
                           target="_blank"
                           rel="noreferrer"
-                          className="hover:text-white transition"
+                          className="hover:text-[var(--theme-accent)] transition-colors"
                         >
                           <FaExternalLinkAlt size={14} />
                         </a>

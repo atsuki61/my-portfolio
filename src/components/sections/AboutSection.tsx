@@ -15,6 +15,8 @@ import {
 import { MdMovie } from 'react-icons/md';
 import { FaMusic, FaGamepad, FaLaptopCode, FaPlane, FaMobileAlt } from 'react-icons/fa';
 import { GiWeightLiftingUp, GiCupcake } from 'react-icons/gi';
+import { StarsBackground } from '../ui/stars-background';
+import { ShootingStars } from '../ui/shooting-stars';
 
 interface AboutSectionProps {
   particleColor: string; // 使わなくなりますが型エラー防止のため残します
@@ -46,9 +48,17 @@ export default function AboutSection({ particleColor }: AboutSectionProps) {
   return (
     <section
       id="about"
-      // ▼ 修正: styleを削除し、bg-[var(--theme-bg)] と transition クラスを追加
-      className="relative py-20 text-white min-h-screen flex flex-col justify-center bg-[var(--theme-bg)] transition-colors duration-1000 ease-in-out"
+      className="relative py-20 text-white min-h-screen flex flex-col justify-center bg-[var(--theme-bg)] transition-colors duration-1000 ease-in-out overflow-hidden" // overflow-hiddenを追加
     >
+      <div className="absolute inset-0 z-0">
+        <StarsBackground />
+        <ShootingStars
+          starColor="var(--theme-accent)"
+          trailColor="var(--theme-accent)"
+          minDelay={1000}
+          maxDelay={3000}
+        />
+      </div>
       <div className="relative z-10 w-full max-w-6xl mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold font-['Space_Grotesk'] mb-6">About Me</h2>

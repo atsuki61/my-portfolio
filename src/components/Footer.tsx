@@ -1,12 +1,17 @@
-// サイトのフッター（一番下の部分）を表示するためのコンポーネントです。
+// src/components/Footer.tsx
 export default function Footer() {
   return (
-    // フッター全体を囲む要素です。背景色、文字色、上下の余白を指定しています。
-    <footer className="bg-black text-white py-6">
-      {/* フッターの内容を中央に配置し、横幅を制限します。画面サイズに応じてレイアウトが変わります。 */}
-      <div className="mx-auto max-w-4xl flex flex-col md:flex-row justify-between items-center px-4">
-        {/* 著作権情報を表示します。現在の年を動的に取得して表示します。 */}
-        <p className="text-sm">© {new Date().getFullYear()} Atsuki. All rights reserved.</p>
+    <footer className="bg-[var(--theme-bg)] border-t border-white/10 text-white py-8 transition-colors duration-1000 ease-in-out">
+      <div className="mx-auto max-w-6xl flex flex-col md:flex-row justify-between items-center px-4 gap-4">
+        <p className="text-sm text-gray-400 font-['Space_Grotesk']">
+          © {new Date().getFullYear()} Atsuki. All rights reserved.
+        </p>
+
+        {/* クレジット表記（ハートの色がテーマカラーに変わります） */}
+        <p className="text-xs text-gray-500 font-mono flex items-center gap-1">
+          Designed & Built with
+          <span className="text-[var(--theme-accent)] text-base transition-colors duration-1000 animate-pulse">♥</span>
+        </p>
       </div>
     </footer>
   );

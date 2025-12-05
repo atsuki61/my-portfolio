@@ -4,7 +4,6 @@ import * as React from 'react';
 import { cn } from '@/utils/cn';
 import { useMotionTemplate, useMotionValue, motion } from 'motion/react';
 
-// ラベルコンポーネント
 export const Label = React.forwardRef<HTMLLabelElement, React.LabelHTMLAttributes<HTMLLabelElement>>(
   ({ className, ...props }, ref) => (
     <label
@@ -19,11 +18,10 @@ export const Label = React.forwardRef<HTMLLabelElement, React.LabelHTMLAttribute
 );
 Label.displayName = 'Label';
 
-// インプットコンポーネント（マウスに反応してボーダーが光るエフェクト付き）
 export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {}
 
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(({ className, type, ...props }, ref) => {
-  const radius = 100; // 光る範囲
+  const radius = 100;
   const [visible, setVisible] = React.useState(false);
 
   let mouseX = useMotionValue(0);
@@ -31,7 +29,6 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(({ className
 
   function handleMouseMove({ currentTarget, clientX, clientY }: any) {
     let { left, top } = currentTarget.getBoundingClientRect();
-
     mouseX.set(clientX - left);
     mouseY.set(clientY - top);
   }
@@ -42,7 +39,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(({ className
         background: useMotionTemplate`
         radial-gradient(
           ${visible ? radius + 'px' : '0px'} circle at ${mouseX}px ${mouseY}px,
-          var(--blue-500),
+          var(--theme-accent), /* ▼ 修正: 青固定からテーマのアクセントカラーに変更 */
           transparent 80%
         )
       `,
@@ -55,9 +52,9 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(({ className
       <input
         type={type}
         className={cn(
-          `flex h-10 w-full border-none bg-zinc-800 text-white shadow-input rounded-md px-3 py-2 text-sm  file:border-0 file:bg-transparent 
+          `flex h-10 w-full border-none bg-[var(--theme-bg)] text-white shadow-input rounded-md px-3 py-2 text-sm  file:border-0 file:bg-transparent 
           file:text-sm file:font-medium placeholder:text-neutral-400 dark:placeholder-text-neutral-600 
-          focus-visible:outline-none focus-visible:ring-[2px]  focus-visible:ring-neutral-600
+          focus-visible:outline-none focus-visible:ring-[2px] focus-visible:ring-[var(--theme-accent)] 
            disabled:cursor-not-allowed disabled:opacity-50
            group-hover/input:shadow-none transition duration-400
            `,
@@ -71,7 +68,6 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(({ className
 });
 Input.displayName = 'Input';
 
-// テキストエリアコンポーネント（Inputと同じスタイル）
 export interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {}
 
 export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(({ className, ...props }, ref) => {
@@ -93,7 +89,7 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(({ 
         background: useMotionTemplate`
         radial-gradient(
           ${visible ? radius + 'px' : '0px'} circle at ${mouseX}px ${mouseY}px,
-          var(--blue-500),
+          var(--theme-accent), /* ▼ 修正: アクセントカラーに変更 */
           transparent 80%
         )
       `,
@@ -105,8 +101,8 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(({ 
     >
       <textarea
         className={cn(
-          `flex min-h-[120px] w-full border-none bg-zinc-800 text-white shadow-input rounded-md px-3 py-2 text-sm  
-          placeholder:text-neutral-400 focus-visible:outline-none focus-visible:ring-[2px] focus-visible:ring-neutral-600
+          `flex min-h-[120px] w-full border-none bg-[var(--theme-bg)] text-white shadow-input rounded-md px-3 py-2 text-sm  
+          placeholder:text-neutral-400 focus-visible:outline-none focus-visible:ring-[2px] focus-visible:ring-[var(--theme-accent)]
            disabled:cursor-not-allowed disabled:opacity-50
            group-hover/input:shadow-none transition duration-400
            `,
