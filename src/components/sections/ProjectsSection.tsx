@@ -49,9 +49,9 @@ export default function ProjectsSection() {
   return (
     <section
       id="projects"
-      className="relative py-20 text-white min-h-screen bg-[var(--theme-bg)] transition-colors duration-1000 ease-in-out overflow-hidden"
+      // ▼ bg-(--theme-bg) に修正
+      className="relative py-20 text-white min-h-screen bg-(--theme-bg) transition-colors duration-1000 ease-in-out overflow-hidden"
     >
-      {/* ▼ 背景エフェクトを追加 */}
       <div className="absolute inset-0 z-0">
         <StarsBackground />
         <ShootingStars
@@ -61,6 +61,7 @@ export default function ProjectsSection() {
           maxDelay={4000}
         />
       </div>
+
       <div className="relative z-10 max-w-7xl mx-auto px-4 space-y-12">
         <h2 className="text-4xl font-bold text-center font-['Space_Grotesk'] mb-8">Projects</h2>
 
@@ -70,8 +71,10 @@ export default function ProjectsSection() {
               key={proj.id}
               className="w-full h-full"
             >
-              <div className="relative flex w-full h-full cursor-pointer flex-col items-stretch rounded-2xl border-0 bg-[var(--theme-card)] transition-colors duration-1000 p-4 saturate-0 hover:saturate-100 group">
-                {/* 画像エリア */}
+              <div
+                // ▼ bg-(--theme-card) に修正
+                className="relative flex w-full h-full cursor-pointer flex-col items-stretch rounded-2xl border-0 bg-(--theme-card) transition-colors duration-1000 p-4 saturate-0 hover:saturate-100 group"
+              >
                 <div className="relative w-full aspect-video overflow-hidden rounded-xl bg-black/50">
                   <Image
                     src={proj.image}
@@ -86,7 +89,6 @@ export default function ProjectsSection() {
                   )}
                 </div>
 
-                {/* テキストエリア */}
                 <div className="mt-4 flex flex-col flex-1 font-mono text-white">
                   <div className="flex justify-between items-center mb-2">
                     <div className="text-lg font-bold truncate pr-2">{proj.title}</div>
@@ -105,21 +107,23 @@ export default function ProjectsSection() {
 
                     <div className="flex gap-3 text-gray-400">
                       {proj.github && (
+                        // ▼ hover:text-(--theme-accent) に修正
                         <a
                           href={proj.github}
                           target="_blank"
                           rel="noreferrer"
-                          className="hover:text-[var(--theme-accent)] transition-colors"
+                          className="hover:text-(--theme-accent) transition-colors"
                         >
                           <FaGithub size={16} />
                         </a>
                       )}
                       {proj.live && (
+                        // ▼ hover:text-(--theme-accent) に修正
                         <a
                           href={proj.live}
                           target="_blank"
                           rel="noreferrer"
-                          className="hover:text-[var(--theme-accent)] transition-colors"
+                          className="hover:text-(--theme-accent) transition-colors"
                         >
                           <FaExternalLinkAlt size={14} />
                         </a>

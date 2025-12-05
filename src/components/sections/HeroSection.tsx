@@ -3,7 +3,7 @@
 
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, Stars } from '@react-three/drei';
-import React from 'react'; // useState, useEffect は不要なので削除
+import React from 'react';
 import TextureSphere from '../TextureSphere';
 import { TextGenerateEffect } from '../ui/text-generate-effect';
 
@@ -24,25 +24,20 @@ interface HeroSectionProps {
 }
 
 export default function HeroSection({ textures, idx, next }: HeroSectionProps) {
-  // これにより、親からデータが渡された瞬間に色が切り替わるようになります。
-
   return (
     <section
       id="home"
-      // transitionの設定は他のセクションと合わせて duration-1000 にしています
-      className="relative h-screen overflow-hidden transition-colors duration-1000 bg-[var(--home-bg-color)] cosmic-grid pt-16 md:pt-0"
-      // State経由ではなく、直接 theme.bg を適用
+      // ▼ bg-[var(--home-bg-color)] -> bg-(--home-bg-color) に修正
+      className="relative h-screen overflow-hidden transition-colors duration-1000 bg-(--home-bg-color) cosmic-grid pt-16 md:pt-0"
       style={{ backgroundColor: textures[idx].theme.bg }}
     >
       <div className="flex flex-col md:flex-row h-full">
-        {/* 左 1/3：テキストエリア */}
         <div className="w-full md:w-1/3 flex flex-col justify-center md:justify-center pt-8 sm:pt-12 md:pt-0 px-4 sm:px-6 md:px-8 z-10">
           <TextGenerateEffect
             words="Hi! My name is Atsuki!"
             className="text-4xl md:text-5xl font-bold text-white mb-4 font-['Space_Grotesk']"
             delay={0}
           />
-
           <TextGenerateEffect
             words="I am a third-year student at Kyoto Computer Gakuin."
             className="text-base md:text-lg text-gray-300 font-normal"
@@ -51,7 +46,6 @@ export default function HeroSection({ textures, idx, next }: HeroSectionProps) {
           />
         </div>
 
-        {/* 右 2/3：3D Canvas */}
         <div className="w-full h-[60vh] md:h-auto md:w-2/3 relative">
           <Canvas
             className="absolute inset-0"

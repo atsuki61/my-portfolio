@@ -18,9 +18,6 @@ import { MdMovie } from 'react-icons/md';
 import { FaMusic, FaGamepad, FaLaptopCode, FaPlane, FaMobileAlt } from 'react-icons/fa';
 import { GiWeightLiftingUp, GiCupcake } from 'react-icons/gi';
 
-// 使わないのでProps定義は空にするか削除
-// interface AboutSectionProps {}
-
 const SKILLS = [
   { icon: <SiNextdotjs />, title: 'Next.js' },
   { icon: <SiReact />, title: 'React' },
@@ -43,11 +40,12 @@ const HOBBIES = [
   { icon: <FaMobileAlt />, title: 'Gadgets' },
 ];
 
-export default function AboutSection({}: { particleColor?: string }) {
+export default function AboutSection() {
   return (
     <section
       id="about"
-      className="relative py-20 text-white min-h-screen flex flex-col justify-center bg-[var(--theme-bg)] transition-colors duration-1000 ease-in-out overflow-hidden"
+      // ▼ bg-(--theme-bg) に修正
+      className="relative py-20 text-white min-h-screen flex flex-col justify-center bg-(--theme-bg) transition-colors duration-1000 ease-in-out overflow-hidden"
     >
       <div className="absolute inset-0 z-0">
         <StarsBackground />
@@ -71,11 +69,11 @@ export default function AboutSection({}: { particleColor?: string }) {
 
         <div className="mb-20">
           <div className="flex items-end gap-4 mb-8 border-b border-gray-700 pb-2">
-            <h3 className="text-3xl font-bold font-['Space_Grotesk'] text-[var(--theme-accent)] transition-colors duration-1000">
+            {/* ▼ text-(--theme-accent) に修正 */}
+            <h3 className="text-3xl font-bold font-['Space_Grotesk'] text-(--theme-accent) transition-colors duration-1000">
               Skills
             </h3>
-            {/* コメント記法を修正 */}
-            <span className="text-sm text-gray-500 pb-1 font-mono">{/* // TECH STACK */}TECH STACK</span>
+            <span className="text-sm text-gray-500 pb-1 font-mono">TECH STACK</span>
           </div>
           <BentoGrid>
             {SKILLS.map((item, i) => (
@@ -91,11 +89,11 @@ export default function AboutSection({}: { particleColor?: string }) {
 
         <div>
           <div className="flex items-end gap-4 mb-8 border-b border-gray-700 pb-2">
-            <h3 className="text-3xl font-bold font-['Space_Grotesk'] text-[var(--theme-accent)] transition-colors duration-1000 opacity-80">
+            {/* ▼ text-(--theme-accent) に修正 */}
+            <h3 className="text-3xl font-bold font-['Space_Grotesk'] text-(--theme-accent) transition-colors duration-1000 opacity-80">
               Hobbies
             </h3>
-            {/* コメント記法を修正 */}
-            <span className="text-sm text-gray-500 pb-1 font-mono">{/* // PRIVATE LIFE */}PRIVATE LIFE</span>
+            <span className="text-sm text-gray-500 pb-1 font-mono">PRIVATE LIFE</span>
           </div>
           <BentoGrid>
             {HOBBIES.map((item, i) => (
@@ -111,10 +109,11 @@ export default function AboutSection({}: { particleColor?: string }) {
 
         <div className="text-center mt-20">
           <p className="text-gray-400 text-sm">
-            Interested in working together? Check out my{' '}
+            Interested in working together? Check out my
+            {/* ▼ hover:text-(--theme-accent) に修正 */}
             <a
               href="#projects"
-              className="text-white underline hover:text-[var(--theme-accent)] transition-colors"
+              className="ml-1 text-white underline hover:text-(--theme-accent) transition-colors"
             >
               Projects
             </a>
