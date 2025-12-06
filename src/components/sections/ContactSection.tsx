@@ -31,7 +31,7 @@ export default function ContactSection() {
       id="contact"
       className="py-20 text-white min-h-screen flex items-center justify-center relative overflow-hidden bg-(--theme-bg) transition-colors duration-1000 ease-in-out"
     >
-      {/* ▼ 修正: ShootingStarsを3つ重ねる */}
+      {/* ShootingStarsを3つ重ねる */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <StarsBackground />
         <ShootingStars

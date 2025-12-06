@@ -21,7 +21,7 @@ const PROJECTS = [
     title: 'MuscleGrow',
     description:
       '日々のトレーニングを記録・可視化する筋トレ管理アプリ。PWA対応でネイティブアプリのような使用感を実現。',
-    image: '/images/musclegrow.png', // ここにスマホの縦長スクショを指定してください
+    image: '/images/musclegrow.png',
     techs: ['Next.js', 'PWA', 'TypeScript'],
     github: 'https://github.com/atsuki61/musclegrow',
     live: 'https://musclegrow.vercel.app/',
@@ -86,7 +86,6 @@ export default function ProjectsSection() {
               >
                 <div className="relative flex w-full h-full cursor-pointer flex-col items-stretch rounded-2xl border-0 bg-(--theme-card) transition-colors duration-1000 p-4 saturate-100 sm:saturate-0 sm:hover:saturate-100 group">
                   <div className="relative w-full aspect-video overflow-hidden rounded-xl bg-gray-900/50">
-                    {/* ▼ 画像表示ロジックの修正 ▼ */}
                     {isMobileApp ? (
                       <>
                         {/* 背景：ぼかしを入れて隙間を埋める */}

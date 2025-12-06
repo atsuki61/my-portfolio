@@ -10,6 +10,31 @@ import { Metadata } from 'next'; // Next.jsのメタデータ型を読み込み�
 export const metadata: Metadata = {
   title: 'atsuki | portfolio', // ページのタイトル
   description: 'Atsukiのポートフォリオサイト', // ページの説明文
+
+  // ▼▼▼ SNSシェア用の設定 (OGP) を追加しました ▼▼▼
+  openGraph: {
+    title: 'atsuki | portfolio',
+    description: 'Atsukiのポートフォリオサイト。Next.jsとThree.jsで構築された宇宙テーマのWebサイトです。',
+    url: 'https://my-portfolio-drab-zeta-67.vercel.app/', // あなたのサイトURL
+    siteName: 'atsuki portfolio',
+    images: [
+      {
+        url: '/images/portfolio.png', // シェアされた時に表示される画像
+        width: 1200,
+        height: 630,
+      },
+    ],
+    locale: 'ja_JP',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image', // 大きな画像で表示する設定
+    title: 'atsuki | portfolio',
+    description: 'Atsukiのポートフォリオサイト',
+    images: ['/images/portfolio.png'],
+  },
+  // ▲▲▲ 追加ここまで ▲▲▲
+
   manifest: '/manifest.json', // PWA（プログレッシブウェブアプリ）のマニフェストファイル
   icons: {
     // サイトのアイコン設定
