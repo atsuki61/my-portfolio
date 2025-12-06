@@ -11,7 +11,7 @@ const PROJECTS = [
     id: 'proj1',
     title: 'ポートフォリオ',
     description: 'Next.js、Three.jsを使った現在のポートフォリオサイト。宇宙をテーマにした3D表現を取り入れています。',
-    image: '/images/portfolio.png',
+    image: '/images/portfolio.jpg',
     techs: ['Next.js', 'Three.js'],
     github: 'https://github.com/atsuki61/my-portfolio',
     live: 'https://my-portfolio-drab-zeta-67.vercel.app/',
