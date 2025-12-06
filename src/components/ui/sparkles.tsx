@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import Particles, { initParticlesEngine } from '@tsparticles/react';
 import type { Container, SingleOrMultiple } from '@tsparticles/engine';
 import { loadSlim } from '@tsparticles/slim';
-import { cn } from '@/utils/cn';
+import { cn } from '@/utils/cn'; // パスが @/lib/utils の場合は書き換えてください
 import { motion, useAnimation } from 'motion/react';
 
 type ParticlesProps = {
@@ -73,7 +73,9 @@ export const SparklesCore = (props: ParticlesProps) => {
                   enable: false,
                   mode: 'repulse',
                 },
-                resize: true as any,
+                resize: {
+                  enable: true,
+                },
               },
               modes: {
                 push: {
