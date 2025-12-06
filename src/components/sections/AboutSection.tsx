@@ -45,11 +45,33 @@ export default function AboutSection() {
       id="about"
       className="relative py-20 text-white min-h-screen flex flex-col justify-center bg-(--theme-bg) transition-colors duration-1000 ease-in-out overflow-hidden"
     >
-      <div className="absolute inset-0 z-0">
+      {/* ▼ 修正: ShootingStarsを3つ重ねて密度を増やす */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
         <StarsBackground />
+        {/* レイヤー1: ゆっくり流れる星 */}
         <ShootingStars
           starColor="var(--theme-accent)"
           trailColor="var(--theme-accent)"
+          minSpeed={15}
+          maxSpeed={30}
+          minDelay={1500}
+          maxDelay={4000}
+        />
+        {/* レイヤー2: 高速で頻繁に流れる星 */}
+        <ShootingStars
+          starColor="var(--theme-accent)"
+          trailColor="var(--theme-accent)"
+          minSpeed={30}
+          maxSpeed={50}
+          minDelay={500}
+          maxDelay={2000}
+        />
+        {/* レイヤー3: ランダムなアクセント */}
+        <ShootingStars
+          starColor="var(--theme-accent)"
+          trailColor="var(--theme-accent)"
+          minSpeed={20}
+          maxSpeed={40}
           minDelay={1000}
           maxDelay={3000}
         />
@@ -102,8 +124,6 @@ export default function AboutSection() {
             ))}
           </BentoGrid>
         </div>
-
-        {/* フッターテキストを削除しました */}
       </div>
     </section>
   );

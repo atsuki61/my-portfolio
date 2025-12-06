@@ -25,15 +25,7 @@ const PROJECTS = [
     github: 'https://github.com/atsuki61/my-portfolio',
     live: 'https://my-portfolio-drab-zeta-67.vercel.app/',
   },
-  {
-    id: 'proj2',
-    title: 'ToDo アプリ',
-    description: 'シンプルで使いやすいToDo管理アプリ。基本的なCRUD操作とローカルストレージ保存に対応。',
-    image: '/images/todo.png',
-    techs: ['JavaScript', 'HTML/CSS'],
-    github: 'https://github.com/atsuki61/todo-app',
-    live: 'https://todo-app-virid-pi-51.vercel.app/',
-  },
+  // ToDoアプリを削除しました
   {
     id: 'proj3',
     title: '100 Days of Code',
@@ -49,32 +41,47 @@ export default function ProjectsSection() {
   return (
     <section
       id="projects"
-      // ▼ bg-(--theme-bg) に修正
       className="relative py-20 text-white min-h-screen bg-(--theme-bg) transition-colors duration-1000 ease-in-out overflow-hidden"
     >
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-0 pointer-events-none">
         <StarsBackground />
         <ShootingStars
           starColor="var(--theme-accent)"
           trailColor="var(--theme-accent)"
+          minSpeed={15}
+          maxSpeed={30}
           minDelay={1500}
           maxDelay={4000}
+        />
+        <ShootingStars
+          starColor="var(--theme-accent)"
+          trailColor="var(--theme-accent)"
+          minSpeed={30}
+          maxSpeed={50}
+          minDelay={500}
+          maxDelay={2000}
+        />
+        <ShootingStars
+          starColor="var(--theme-accent)"
+          trailColor="var(--theme-accent)"
+          minSpeed={20}
+          maxSpeed={40}
+          minDelay={1000}
+          maxDelay={3000}
         />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 space-y-12">
         <h2 className="text-4xl font-bold text-center font-['Space_Grotesk'] mb-8">Projects</h2>
 
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        {/* ▼ 修正: grid-cols-2 を指定してスマホでも2列に。gap-4で間隔調整 */}
+        <div className="grid grid-cols-2 gap-4 sm:gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {PROJECTS.map((proj) => (
             <CometCard
               key={proj.id}
               className="w-full h-full"
             >
-              <div
-                // ▼ bg-(--theme-card) に修正
-                className="relative flex w-full h-full cursor-pointer flex-col items-stretch rounded-2xl border-0 bg-(--theme-card) transition-colors duration-1000 p-4 saturate-0 hover:saturate-100 group"
-              >
+              <div className="relative flex w-full h-full cursor-pointer flex-col items-stretch rounded-2xl border-0 bg-(--theme-card) transition-colors duration-1000 p-4 saturate-0 hover:saturate-100 group">
                 <div className="relative w-full aspect-video overflow-hidden rounded-xl bg-black/50">
                   <Image
                     src={proj.image}
@@ -90,24 +97,29 @@ export default function ProjectsSection() {
                 </div>
 
                 <div className="mt-4 flex flex-col flex-1 font-mono text-white">
-                  <div className="flex justify-between items-center mb-2">
-                    <div className="text-lg font-bold truncate pr-2">{proj.title}</div>
-                    <div className="text-xs text-gray-500 shrink-0">#{proj.id.slice(0, 4).toUpperCase()}</div>
+                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-2">
+                    <div className="text-sm sm:text-lg font-bold truncate pr-2">{proj.title}</div>
+                    <div className="text-[10px] sm:text-xs text-gray-500 shrink-0 mt-1 sm:mt-0">
+                      #{proj.id.slice(0, 4).toUpperCase()}
+                    </div>
                   </div>
 
-                  <p className="text-xs text-gray-400 line-clamp-2 mb-4 flex-1">{proj.description}</p>
+                  {/* スマホの2列表示だと説明文が長くなる可能性があるので line-clamp を調整 */}
+                  <p className="text-[10px] sm:text-xs text-gray-400 line-clamp-3 sm:line-clamp-2 mb-4 flex-1 leading-relaxed">
+                    {proj.description}
+                  </p>
 
-                  <div className="flex items-center justify-between mt-auto pt-2 border-t border-white/10">
-                    <div className="flex gap-2 text-xs text-gray-400">
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mt-auto pt-2 border-t border-white/10 gap-2">
+                    {/* 技術タグ: スマホでは少し小さく表示 */}
+                    <div className="flex flex-wrap gap-1 text-[10px] sm:text-xs text-gray-400">
                       {proj.techs.slice(0, 2).map((t) => (
                         <span key={t}>{t}</span>
                       ))}
                       {proj.techs.length > 2 && <span>+{proj.techs.length - 2}</span>}
                     </div>
 
-                    <div className="flex gap-3 text-gray-400">
+                    <div className="flex gap-3 text-gray-400 self-end sm:self-auto">
                       {proj.github && (
-                        // ▼ hover:text-(--theme-accent) に修正
                         <a
                           href={proj.github}
                           target="_blank"
@@ -118,7 +130,6 @@ export default function ProjectsSection() {
                         </a>
                       )}
                       {proj.live && (
-                        // ▼ hover:text-(--theme-accent) に修正
                         <a
                           href={proj.live}
                           target="_blank"

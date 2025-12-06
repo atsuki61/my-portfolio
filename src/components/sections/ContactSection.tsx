@@ -5,6 +5,8 @@ import { FormValues, formValidation } from '@/utils/validation';
 import { sendEmail } from '@/utils/sendEmail';
 import { Label, Input, Textarea } from '../ui/form-components';
 import { FaGithub, FaSquareXTwitter } from 'react-icons/fa6';
+import { StarsBackground } from '../ui/stars-background';
+import { ShootingStars } from '../ui/shooting-stars';
 
 export default function ContactSection() {
   const {
@@ -29,6 +31,35 @@ export default function ContactSection() {
       id="contact"
       className="py-20 text-white min-h-screen flex items-center justify-center relative overflow-hidden bg-(--theme-bg) transition-colors duration-1000 ease-in-out"
     >
+      {/* ▼ 修正: ShootingStarsを3つ重ねる */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <StarsBackground />
+        <ShootingStars
+          starColor="var(--theme-accent)"
+          trailColor="var(--theme-accent)"
+          minSpeed={15}
+          maxSpeed={30}
+          minDelay={1500}
+          maxDelay={4000}
+        />
+        <ShootingStars
+          starColor="var(--theme-accent)"
+          trailColor="var(--theme-accent)"
+          minSpeed={30}
+          maxSpeed={50}
+          minDelay={500}
+          maxDelay={2000}
+        />
+        <ShootingStars
+          starColor="var(--theme-accent)"
+          trailColor="var(--theme-accent)"
+          minSpeed={20}
+          maxSpeed={40}
+          minDelay={1000}
+          maxDelay={3000}
+        />
+      </div>
+
       <div className="absolute top-[-20%] left-[-10%] w-[500px] h-[500px] bg-(--theme-accent) opacity-20 rounded-full blur-[100px] pointer-events-none transition-colors duration-1000" />
       <div className="absolute bottom-[-20%] right-[-10%] w-[500px] h-[500px] bg-(--theme-accent) opacity-20 rounded-full blur-[100px] pointer-events-none transition-colors duration-1000" />
 
@@ -36,7 +67,6 @@ export default function ContactSection() {
         <div className="space-y-8 text-center lg:text-left">
           <div>
             <h2 className="text-5xl md:text-6xl font-bold font-['Space_Grotesk'] mb-6">Get in Touch</h2>
-            {/* 説明文を削除しました */}
           </div>
 
           <div className="flex justify-center lg:justify-start gap-6">
@@ -56,7 +86,6 @@ export default function ContactSection() {
             >
               <FaSquareXTwitter className="text-3xl text-gray-300 group-hover:text-(--theme-accent) transition-colors duration-300" />
             </a>
-            {/* Gmailアイコンを削除しました */}
           </div>
         </div>
 
