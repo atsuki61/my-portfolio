@@ -30,7 +30,7 @@ const PROJECTS = [
     id: 'proj3',
     title: '100 Days of Code',
     description: '100日間のコーディング学習記録。日々の学習内容と成果物を一覧で確認できます。',
-    image: '/images/100DaysOfCode.png',
+    image: '/images/100DaysOfCode.jpg',
     techs: ['Next.js', 'TypeScript'],
     github: 'https://github.com/atsuki61/100DaysOfCode',
     live: 'https://100-days-of-code-delta.vercel.app/',
