@@ -12,7 +12,7 @@ export default function HomePage() {
     () => [
       {
         name: '月',
-        url: '/images/moon.jpg',
+        url: '/images/oki2.jpg',
         rotationSpeed: 0.005,
         theme: {
           bg: '#020617',

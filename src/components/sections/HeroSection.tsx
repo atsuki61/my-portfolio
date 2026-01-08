@@ -55,7 +55,7 @@ export default function HeroSection({ textures, idx, next }: HeroSectionProps) {
               delay={0}
             />
             <TextGenerateEffect
-              words="I am a third-year student at Kyoto Computer Gakuin."
+              words="I am a third-year student"
               className="text-base md:text-lg text-gray-300 font-normal"
               delay={1.5}
               duration={0.7}
